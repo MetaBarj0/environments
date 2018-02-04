@@ -1,2 +1,2 @@
 #!/bin/sh
-git clone https://github.com/VundleVim/Vundle.vim.git
+git clone git@github.com:MetaBarj0/Vundle.vim.git
