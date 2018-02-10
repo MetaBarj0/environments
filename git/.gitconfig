@@ -1,0 +1,10 @@
+[core]
+  editor = "vim"
+	autocrlf = input
+[user]
+	name = MetaBarj0
+	email = troctsch.cpp@gmail.com
+[push]
+	default = simple
+[http]
+	sslVerify = false
