@@ -5,3 +5,5 @@ source ~/.vim/MetaBarj0.vim/NERDTree_configuration.vim
 source ~/.vim/MetaBarj0.vim/functions.vim
 source ~/.vim/MetaBarj0.vim/c++_dev.vim
 source ~/.vim/MetaBarj0.vim/js_dev.vim
+source ~/.vim/MetaBarj0.vim/w0rpale_configuration.vim
+source ~/.vim/MetaBarj0.vim/airline_configuration.vim
