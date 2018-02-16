@@ -46,14 +46,3 @@ vmap <C-v><C-c><C-e> :s/^/\/\/\ / <CR> :let @/="" <CR>
 
 " CTRL-v CTRL-c CTRL-d : Visual Comment Disable
 vmap <C-v><C-c><C-d> :s/^\/\/\ // <CR> :let @/="" <CR>
-
-" some snippets
-:iabbrev guard<c-s>
-\#ifndef __HPP_<CR>
-\#define __HPP_<CR><CR><CR><CR>
-\#endif // __HPP_<ESC>5<UP>$4<LEFT>i
-
-:iabbrev brief<c-s>
-\/**<CR>
-\\brief<CR>
-\/<ESC><UP>A
