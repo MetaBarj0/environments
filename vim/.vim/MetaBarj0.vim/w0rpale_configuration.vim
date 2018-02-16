@@ -2,5 +2,5 @@
 let g:airline#extensions#ale#enabled = 1
 
 let g:ale_linters={
-\ 'cpp': ['clang', 'clang-check', 'clang-format']
+\ 'cpp': ['clang-check', 'clang-format']
 \}
