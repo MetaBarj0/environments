@@ -15,6 +15,12 @@ Plugin 'gmarik/Vundle.vim'
 " YouCompleteMe plugin
 Plugin 'Valloric/YouCompleteMe'
 
+" w0rp/ale (linting engine)
+Plugin 'w0rp/ale'
+
+" statusline
+Plugin 'vim-airline/vim-airline'
+
 " tlib
 Plugin 'tlib'
 
