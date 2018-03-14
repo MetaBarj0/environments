@@ -2,6 +2,8 @@
 call plug#begin($HOME.'/.vim/plugged')
 
 Plug 'gmarik/Vundle.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'itchyny/lightline.vim'
@@ -52,6 +54,9 @@ let mapleader=","
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
+
+" set the window working directory for currently edited file
+nmap <silent> <leader>lcd :lcd %:p:h<CR>
 
 " Editor options
 "set hidden  " Hide buffers instead of closing them
@@ -112,7 +117,7 @@ let g:netrw_altv = 1
 let g:netrw_winsize = 20
 augroup ProjectDrawer
   autocmd!
-  autocmd VimEnter * :Vexplore
+  autocmd VimEnter * :NERDTree
 augroup END
 
 " PLUGINS CONFIGURATION
