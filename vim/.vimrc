@@ -198,7 +198,7 @@ nmap <Leader>a<bar> :Tabularize /<bar><CR>
 vmap <Leader>a<bar> :Tabularize /<bar><CR>
 
 " GITGUTTER
-set shell=/usr/local/bin/bash
+set shell=bash
 nmap <leader>hn <Plug>GitGutterNextHunk
 nmap <leader>hp <Plug>GitGutterPrevHunk
 nmap <Leader>hs <Plug>GitGutterStageHunk
