@@ -28,7 +28,7 @@ Plug 'flazz/vim-colorschemes'
 Plug 'majutsushi/tagbar'
 Plug 'xolox/vim-misc'
 Plug 'shougo/neocomplete.vim'
-Plug 'justmao945/vim-clang'
+Plug 'rip-rip/clang_complete'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'honza/vim-snippets'
@@ -299,12 +299,11 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-" vim-clang and neocomplete
-" " disable auto completion for vim-clang
-let g:clang_auto = 0
-" default 'longest' can not work with neocomplete
-let g:clang_c_completeopt = 'menuone,preview'
-let g:clang_cpp_completeopt = 'menuone,preview'
+" clang_complete and neocomplete
+let g:clang_library_path='/usr/local/lib/'
+let g:clang_use_library=1
+let g:clang_complete_auto=0
+let g:clang_complete_auto='compile_commands.json'
 
 " use neocomplete
 " input patterns
