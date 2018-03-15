@@ -301,7 +301,7 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 let g:clang_library_path='/usr/local/lib/'
 let g:clang_use_library=1
 let g:clang_complete_auto=0
-let g:clang_complete_auto='compile_commands.json'
+let g:clang_auto_user_options='compile_commands.json'
 
 " use neocomplete
 " input patterns
