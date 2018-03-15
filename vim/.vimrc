@@ -144,8 +144,8 @@ let g:lightline = {
     \   'linter_ok': 'left'
     \ }, 
     \ 'component_function': { 'fugitive': 'LightlineFugitive', 'filename': 'LightlineFilename', 'readonly': 'LightlineReadonly', 'modified': 'LightlineModified' },
-    \ 'separator': { 'left': "", 'right': "" },
-    \ 'subseparator': { 'left': "", 'right': "" }
+    \ 'separator': { 'left': "<", 'right': ">" },
+    \ 'subseparator': { 'left': "‹", 'right': "›" }
 \ }
 
 let g:lightline.tabline = {
@@ -156,7 +156,7 @@ let g:lightline.tabline = {
 function! LightlineFugitive()
   if exists("*fugitive#head")
     let branch = fugitive#head()
-    return branch !=# '' ? ""." ".branch : ''
+    return branch !=# '' ? "ß"." ".branch : ''
   endif
   return ''
 endfunction
@@ -177,7 +177,7 @@ function! LightlineReadonly()
   if &filetype == "help"
     return ""
   elseif &readonly
-    return ""
+    return "ø"
   else
     return ""
   endif
@@ -357,10 +357,10 @@ let g:neosnippet#snippets_directory = "$HOME/.vim/bundle/vim-snippets/snippets"
 let g:pyclewn_python="/usr/local/bin/python3"
 
 " LIGHTLINE-ALE
-let g:lightline#ale#indicator_checking = ""
-let g:lightline#ale#indicator_errors = ""
-let g:lightline#ale#indicator_warnings = ""
-let g:lightline#ale#indicator_ok = ""
+let g:lightline#ale#indicator_checking = "∞"
+let g:lightline#ale#indicator_errors = "¡"
+let g:lightline#ale#indicator_warnings = "¿}"
+let g:lightline#ale#indicator_ok = "√"
 
 " ALE
 let g:ale_linters = {
