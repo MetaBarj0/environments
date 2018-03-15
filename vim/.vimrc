@@ -249,9 +249,7 @@ let g:easytags_async = 1
 let g:easytags_dynamic_files = 1
 let g:easytags_auto_hightlight = 0
 let g:easytags_always_enabled = 1
-
-" VIM-TAGS
-let g:vim_tags_ctags_binary = '/usr/local/bin/ctags'
+let g:easytags_suppress_ctags_warning = 1
 
 " NEOCOMPLETE
 " Disable AutoComplPop.
