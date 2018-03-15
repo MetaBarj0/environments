@@ -375,7 +375,7 @@ let g:lightline#ale#indicator_ok = ""
 
 " ALE
 let g:ale_linters = {
-\   'cpp': ['clang-check', 'clang-format']
+\   'cpp': ['clang', 'clang-check', 'clang-format']
 \}
 let g:ale_open_list=1
 let g:ale_list_window_size=3
