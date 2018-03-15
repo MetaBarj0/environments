@@ -99,6 +99,23 @@ set noswapfile
 set expandtab " always use spaces instead of tab characters
 set softtabstop=2   " set the number of columns for TAB
 
+" functions
+function! DisplayTreeAndTags()
+  TagbarOpen
+  NERDTreeMirror
+  wincmd p
+  wincmd =
+  call FindFileInTree()
+endfunction
+
+function! FindFileInTree()
+  if &modifiable
+    NERDTreeFind
+    wincmd p
+    wincmd =
+  endif
+endfunction
+
 " Load colorscheme
 if &t_Co >= 256 || has("gui_running")
     colorscheme bubblegum-256-dark
@@ -132,12 +149,13 @@ let g:netrw_winsize = 20
 augroup ProjectDrawer
   autocmd!
   autocmd VimEnter * :NERDTree
+  autocmd BufWinEnter *.h,*.hpp,*.cpp,*.tcc call DisplayTreeAndTags()
+  autocmd BufEnter *.h,*.hpp,*.cpp,*.tcc call FindFileInTree()
 augroup END
 
 " PLUGINS CONFIGURATION
 " TAGBAR
 nmap <F8> :TagbarToggle<CR>
-autocmd FileType c,cpp,hpp,h,js,jsx,ts :TagbarOpen
 let g:tagbar_iconchars = ['▸', '▾']
 " LIGHTLINE
 set laststatus=2
