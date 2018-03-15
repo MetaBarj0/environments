@@ -50,6 +50,7 @@ set guioptions-=L
 
 " EDITOR CONFIGURATION
 let mapleader=","
+set updatetime=250
 
 " Quickly edit/reload the vimrc file
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
