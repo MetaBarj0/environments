@@ -33,7 +33,7 @@ EOI
     return 1
   fi
 
-  find "$dir" -type f -exec grep -EH "$pattern" {} +
+  find "$dir" -type f -exec grep -EH "$pattern" {} \;
 }
 
 alias find_in='search_in_file_content_'

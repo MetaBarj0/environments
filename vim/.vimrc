@@ -257,7 +257,7 @@ map <silent> <leader>gs :Gstatus<CR>
 map <silent> <leader>gc :Gcommit<CR>
 map <silent> <leader>gd :Gdiff<CR>
 map <silent> <leader>gp :Gpush<CR>
-map <silent> <leader>gl :Glog -- %<CR> <bar> :copen<CR>
+map <silent> <leader>gl :Glog -- %<CR> <bar> :botright cwindow<CR>
 
 " UNDOTREE
 nnoremap <silent> <leader>u :UndotreeToggle<CR>
