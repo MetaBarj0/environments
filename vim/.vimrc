@@ -301,25 +301,20 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 let g:clang_library_path='/usr/local/lib/'
 let g:clang_use_library=1
 let g:clang_complete_auto=0
+let g:clang_auto_select = 0
 let g:clang_auto_user_options='compile_commands.json'
+let g:clang_make_default_keymappings = 0
+let g:clang_user_options='-I /usr/local/include -I /usr/local/amd64-linux-musl/include/c++/7.3.0/amd64-linux-musl -I /usr/local/amd64-linux-musl/include/c++/7.3.0'
 
 " use neocomplete
+let g:neocomplete#enable_at_startup=1
+let g:neocomplete#sources#omni#input_patterns = {'cpp':
+            \ '\([^.[:digit:] *\t]\|\w\d\)\%(\.\|->\)\w*\|\h\w*::\w*'}
+
 " input patterns
 if !exists('g:neocomplete#force_omni_input_patterns')
   let g:neocomplete#force_omni_input_patterns = {}
 endif
-
-" for c and c++
-let g:neocomplete#force_omni_input_patterns.c =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
-let g:neocomplete#force_omni_input_patterns.cpp =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
-let g:neocomplete#force_omni_input_patterns.hpp =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
-let g:neocomplete#force_omni_input_patterns.h =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
-let g:neocomplete#force_omni_input_patterns.tcc =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -364,7 +359,6 @@ let g:lightline#ale#indicator_ok = "√"
 
 " ALE
 let g:ale_linters = {
-\   'haskell': ['hdevtools', 'hlint', 'stack-ghc', 'stack-build'],
 \   'cpp': ['clang-check', 'clang-format']
 \}
 let g:ale_open_list=1
