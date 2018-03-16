@@ -1,7 +1,7 @@
 " PLUGINS
 call plug#begin($HOME.'/.vim/plugged')
 
-Plug 'gmarik/Vundle.vim'
+Plug 'ryanoasis/vim-devicons'
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-fugitive'
