@@ -99,6 +99,7 @@ set nobackup
 set noswapfile
 set expandtab " always use spaces instead of tab characters
 set softtabstop=2   " set the number of columns for TAB
+set colorcolumn=80
 
 " functions
 function! DisplayTreeAndTags()
