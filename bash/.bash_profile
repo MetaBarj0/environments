@@ -13,7 +13,7 @@ if [ -z "$running_agents" ]; then
   eval "$(ssh-agent)"
 fi
 
-search_in_file_content_() {
+find_in_() {
   local usage="$(cat << EOI
 
 Usage:
@@ -36,4 +36,4 @@ EOI
   find "$dir" -type f -exec grep -EH "$pattern" {} \;
 }
 
-alias find_in='search_in_file_content_'
+alias find_in='find_in_'
