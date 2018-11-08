@@ -75,7 +75,7 @@ nmap <silent> <leader>lcd :lcd %:p:h<CR>
 
 " Editor options
 "set hidden  " Hide buffers instead of closing them
-set nowrap        " don't wrap lines
+set wrap          " do wrap lines
 set tabstop=2     " a tab is two spaces
 set backspace=indent,eol,start
                   " allow backspacing over everything in insert mode
