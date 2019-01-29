@@ -134,7 +134,7 @@ set pastetoggle=<F3>
 "Easy buffer navigation
 nnoremap gb :ls<CR>:b!<Space>
 
-" Tags navigation mappings{{{
+" Tags navigation mappings
 map <silent> <leader>b :tjump <C-R><C-W><CR>
 map <silent> <leader>B :pop<CR>
 
@@ -251,7 +251,6 @@ set shell=bash
 nmap <leader>hn <Plug>GitGutterNextHunk
 nmap <leader>hp <Plug>GitGutterPrevHunk
 nmap <Leader>hs <Plug>GitGutterStageHunk
-nmap <Leader>hr <Plug>GitGutterRevertHunk
 nmap <Leader>hu <Plug>GitGutterUndoHunk
 nmap <Leader>hv <Plug>GitGutterPreviewHunk
 let g:gitgutter_updatetime = 250
@@ -349,6 +348,8 @@ let g:clang_complete_auto=0
 let g:clang_auto_select = 0
 let g:clang_auto_user_options='compile_commands.json'
 let g:clang_make_default_keymappings = 0
+
+" TODO : find a better way to handle that option
 let g:clang_user_options='-I /usr/local/include -I /usr/local/amd64-linux-musl/include/c++/7.3.0/amd64-linux-musl -I /usr/local/amd64-linux-musl/include/c++/7.3.0'
 
 " use neocomplete
