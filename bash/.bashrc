@@ -7,5 +7,5 @@ alias pushcd='pushd $(pwd)'
 
 export PS1='[\u@\h \W]\$ '
 
-. .bashrc_find-in
-. .bashrc_ssh-auth
+. .bashrc_find-in.sh
+. .bashrc_ssh-auth.sh
