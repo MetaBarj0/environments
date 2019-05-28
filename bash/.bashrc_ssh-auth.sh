@@ -8,7 +8,7 @@ function add_identity() {
   ssh-add -t 1d
 }
 
-function extract_pid_from_process_line() {
+function extract_pid_from_ps_output_line() {
   local process_line="$1"
   local pid_index=$2
 
@@ -20,7 +20,11 @@ function extract_pid_from_process_line() {
   echo $pid
 }
 
-function ensure_only_one_ssh_agent_is_running() {
+function ensure_correct_ssh_agent_is_running() {
+  if [ ! -S "$SSH_AGENT_BIND" ]; then
+    return 1
+  fi
+
   local ssh_agents="$(get_agents_process_list)"
 
   if [ -z "$ssh_agents" ]; then
@@ -33,7 +37,7 @@ function ensure_only_one_ssh_agent_is_running() {
     return 1
   fi
 
-  echo $(extract_pid_from_process_line "$ssh_agents" $(find_pid_column_index_from_ps_output))
+  echo $(extract_pid_from_ps_output_line "$ssh_agents" $(find_pid_column_index_from_ps_output))
 }
 
 function setup_environment() {
@@ -60,7 +64,7 @@ function register_identity() {
 
 function try_connect_existing_agent {
   local ssh_agent_pid=
-  ssh_agent_pid=$(ensure_only_one_ssh_agent_is_running) \
+  ssh_agent_pid=$(ensure_correct_ssh_agent_is_running) \
   && setup_environment "$ssh_agent_pid" \
   && register_identity \
   || {
@@ -101,18 +105,15 @@ function find_pid_column_index_from_ps_output() {
   local column=
   local index=1
   for column in $header; do
-    if [ "$column" = 'PID' ]; then
-      break
-    else
-      index=$(( index + 1 ))
-    fi
+    [ "$column" = 'PID' ] && break \
+    || index=$(( index + 1 ))
   done
 
   echo $index
 }
 
 function extract_old_agent_pid_from_process_line() {
-  local pid="$(extract_pid_from_process_line "$1" $2)"
+  local pid="$(extract_pid_from_ps_output_line "$1" $2)"
 
   [ -z $SSH_AGENT_PID ] && echo $pid && return 0
   [ $pid -ne $SSH_AGENT_PID ] && echo $pid
