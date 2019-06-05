@@ -52,9 +52,14 @@ function clear_environment() {
   unset SSH_AUTH_SOCK
 }
 
+function remove_orphan_socket() {
+  [ -S "$SSH_AGENT_BIND" ] && rm -f "$SSH_AGENT_BIND"
+}
+
 function prune_system_from_old_agent() {
   clear_environment \
-  && kill_old_agents_processs
+  && kill_old_agents_processs \
+  && remove_orphan_socket
 }
 
 function register_identity() {
