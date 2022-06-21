@@ -1,0 +1,4 @@
+#!/bin/env sh
+# make sure this script is reachable in PATH
+
+cat /proc/mounts | grep ' / ' | sed -e 's/ \/ .\+//'

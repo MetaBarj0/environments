@@ -102,9 +102,10 @@ alias fgrep='fgrep --color=auto'              # show differences in colour
 alias ls='ls -hF --color=tty'                 # classify files in colour
 # alias dir='ls --color=auto --format=vertical'
 # alias vdir='ls --color=auto --format=long'
-alias ll='ls -lAh'                              # long list
+alias ll='ls -liAh'                              # long list
 # alias la='ls -A'                              # all but . and ..
 # alias l='ls -CF'                              #
+alias s='cd ..'
 
 # Umask
 #
@@ -133,3 +134,10 @@ alias ll='ls -lAh'                              # long list
 . ~/.bashrc_ssh-auth.sh
 . ~/.bashrc_cd.sh
 
+export XDG_CONFIG_HOME=$(cygpath -w ~/.init)
+export XDG_DATA_HOME=$(cygpath -w ~/.local/share)
+export XDG_STATE_HOME=$(cygpath -w ~/.local/state)
+
+export PATH=$PATH:/opt/node-v18.4.0-win-x64
+export PATH=$PATH:/opt/dotnet-sdk-6.0.301-win-x64
+export PATH=$PATH:/opt/msys2extra

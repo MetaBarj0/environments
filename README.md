@@ -1,2 +1,2 @@
-# configs
-Various configuration file for various software
+# environments
+Various configuration file for various software in various environment

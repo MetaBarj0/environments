@@ -1,0 +1,29 @@
+#!/bin/env bash
+set -e
+
+d="$(dirname $0)"
+cd "$d"
+thisdir="$(pwd -P)"
+cd - 2>/dev/null 1>&2
+
+unset SHELL
+
+export ROOTMOUNT="$($thisdir/rootmount)"
+
+if [ ${#} -eq 0 ]; then
+  exec winpty nvim
+fi
+
+declare -a option_args
+declare -a file_args
+
+for arg in $@; do
+  if [[ $arg =~ ^(\+|-)-?[^+-].*$ ]]; then
+    option_args+=("$arg")
+  else
+    file_args+=("$(cygpath -m $arg)")
+  fi
+done
+
+exec winpty nvim ${option_args[@]} ${file_args[@]}
+

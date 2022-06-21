@@ -1,0 +1,8 @@
+#!/bin/env bash
+
+d="$(dirname $0)"
+cd "$d"
+thisdir="$(pwd -P)"
+cd - 2>/dev/null 1>&2
+
+exec "$thisdir/exec_nvim" $@
