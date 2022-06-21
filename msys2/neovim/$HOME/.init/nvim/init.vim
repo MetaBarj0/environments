@@ -92,6 +92,7 @@ Plug 'tani/ddc-path'
 Plug 'Shougo/ddc-cmdline'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-dispatch'
+Plug 'mfussenegger/nvim-dap'
 call plug#end()
 
 " Plug 'scrooloose/nerdtree' configuration
@@ -414,3 +415,73 @@ let g:ale_linter_aliases = {
 
 " Plug 'tpope/vim-dispatch' configuration
 let g:tmux_session = 1
+
+" Plug 'mfussenegger/nvim-dap' configuration
+" C/C++/Rust via lldb-vscode
+" Ensure you've installed the llvm toolchain:
+" pacman -S mingw-w64-clang-x86_64-toolchain
+lua <<EOI
+
+local dap = require('dap')
+dap.adapters.lldb = {
+  type = 'executable',
+  command = '/clang64/bin/lldb-vscode',
+  name = 'lldb'
+}
+
+dap.configurations.cpp = {
+  {
+    name = 'Launch',
+    type = 'lldb',
+    request = 'launch',
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '\\', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = false,
+    args = {},
+    env = function()
+      local variables = {}
+      for k, v in pairs(vim.fn.environ()) do
+        table.insert(variables, string.format("%s=%s", k, v))
+      end
+
+      return variables
+    end,
+
+
+    -- if you change `runInTerminal` to true, you might need to change the yama/ptrace_scope setting:
+    --
+    --    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+    --
+    -- Otherwise you might get the following error:
+    --
+    --    Error on launch: Failed to attach to the target process
+    --
+    -- But you should be aware of the implications:
+    -- https://www.kernel.org/doc/html/latest/admin-guide/LSM/Yama.html
+    -- runInTerminal = false,
+  },
+  {
+    -- If you get an "Operation not permitted" error using this, try disabling YAMA:
+    --  echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+    name = "Attach to process",
+    type = 'cpp',  -- Adjust this to match your adapter name (`dap.adapters.<name>`)
+    request = 'attach',
+    pid = require('dap.utils').pick_process,
+    args = {},
+    env = function()
+      local variables = {}
+      for k, v in pairs(vim.fn.environ()) do
+        table.insert(variables, string.format("%s=%s", k, v))
+      end
+
+      return variables
+    end,
+  },
+}
+
+-- If you want to use this for Rust and C, add something like this:
+dap.configurations.c = dap.configurations.cpp
+
+EOI
