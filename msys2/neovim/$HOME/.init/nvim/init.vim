@@ -383,6 +383,7 @@ let g:airline#extensions#fugitiveline#enabled = 1
 augroup fugitive_workaround_msys2
   autocmd!
   autocmd FileType fugitive nnoremap <buffer> cc :lcd $ROOTMOUNT<CR> :Git commit<CR>
+  autocmd FileType fugitive nnoremap <buffer> ca :lcd $ROOTMOUNT<CR> :Git commit --amend<CR>
 augroup END
 
 " NERDTree stuff
