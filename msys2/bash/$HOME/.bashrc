@@ -142,3 +142,5 @@ export PATH=$PATH:/opt/node-v18.4.0-win-x64
 export PATH=$PATH:/opt/dotnet-sdk-6.0.301-win-x64
 export PATH=$PATH:/opt/msys2extra/bin
 export PATH=$PATH:~/.deno/bin
+
+export MANPATH=$MANPATH:/usr/local/share/man
