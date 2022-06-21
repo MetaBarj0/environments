@@ -15,10 +15,13 @@ nmap <silent> <leader>lcd :lcd %:p:h<CR>
 
 " buffer configuration
 set hidden " Hide buffers instead of closing them
+
 " easy buffer navigation
 nnoremap gb :ls<CR>:b!<Space>
 nnoremap <Leader>bn :bn<CR>
 nnoremap <Leader>bp :bp<CR>
+nnoremap <Leader>btp :tabnew %<CR>:tabp<CR>:bp<CR>:tabn<CR>
+nnoremap <Leader>btn :tabnew %<CR>:tabp<CR>:bn<CR>:tabn<CR>
 
 " tab and indentation
 set tabstop=2     " a tab is two spaces
