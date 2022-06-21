@@ -210,6 +210,8 @@ let g:SignaturePurgeConfirmation = 1
 let g:numbers_exclude = ['tagbar', 'nerdtree', 'undotree']
 
 " Plug 'vim-denops/denops.vim' configuration
+" install deno to make all ddc plugin work
+" curl -fsSL https://deno.land/install.sh | sh
 
 " Plug 'vim-denops/denops-helloworld.vim' configuration
 

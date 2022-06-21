@@ -1,4 +1,0 @@
-#!/bin/env bash
-
-# necessary for neovim plugins
-curl -fsSL https://deno.land/install.sh | sh

@@ -1,7 +1,31 @@
 # This is Git's per-user configuration file.
 [user]
-  name = meta
+  name  = meta
   email = troctsch.cpp@gmail.com
 
 [core]
   editor = vim
+
+[alias]
+  br  = branch
+  brv = branch -vv
+  cc  = commit
+  ca  = commit --amend
+  sw  = switch
+  co  = checkout
+  rs  = restore
+  st  = status
+  fe  = fetch
+  fep = fetch --prune
+  re  = rebase
+  rei = rebase -i
+  rer = rebase -r
+  ps  = push
+  psf = push --force-with-lease
+  pl  = pull
+  plr = pull --rebase
+  sth = stash
+  stl = stash list
+  stp = stash pop
+  sta = stash apply
+  std = stash drop
