@@ -1,4 +1,6 @@
 #!/bin/env sh
-# make sure this script is reachable in PATH
+
+# This script return the directory path where the root mount
+# point is mounted with a slash notation (i.e. C:/msys64)
 
 cat /proc/mounts | grep ' / ' | sed -e 's/ \/ .\+//'

@@ -1,5 +1,7 @@
 #!/bin/env bash
 
+# TODO: get this chunk of code from a reachable script in /usr/local/bin
+#       and evaluate it just like a macro to avoid code duplication
 d="$(dirname $0)"
 cd "$d"
 thisdir="$(pwd -P)"

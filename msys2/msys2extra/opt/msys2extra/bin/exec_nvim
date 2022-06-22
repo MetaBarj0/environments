@@ -1,6 +1,20 @@
 #!/bin/env bash
-set -e
 
+# This script execute neovim within a mintty terminal.
+# normally, neovim (the console flavor) does not support
+# mintty. To workaround this, nvim must be executed behind
+# winpty (https://github.com/rprichard/winpty) so you have
+# to install this package to get neovim console work with
+# mintty. You may either:
+# - build winpty nightly using the aforementionned github
+#   repository
+# - install a stable version using pacman: `pacman -S msys/winpty`
+# This script relies on the `rootmount` script located in the same
+# folder. See this script for more details.
+
+
+# TODO: get this chunk of code from a reachable script in /usr/local/bin
+#       and evaluate it just like a macro to avoid code duplication
 d="$(dirname $0)"
 cd "$d"
 thisdir="$(pwd -P)"
