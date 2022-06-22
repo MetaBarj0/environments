@@ -15,7 +15,6 @@ nmap <silent> <leader>lcd :lcd %:p:h<CR>
 
 " buffer configuration
 set hidden " Hide buffers instead of closing them
-
 " easy buffer navigation
 nnoremap gb :ls<CR>:b!<Space>
 nnoremap <Leader>bn :bn<CR>
@@ -274,7 +273,7 @@ endfunction
 " registering ddc filters and sources
 call ddc#custom#patch_global(
   \ 'sources',
-  \ ['around', 'necovim', 'nvim-lsp', 'ale', 'ctags', 'path', 'cmdline'])
+  \ ['around', 'necovim', 'nvim-lsp', 'ale', 'ctags', 'path', 'cmdline', 'clangd'])
 
 call ddc#custom#patch_global('sourceOptions', {
   \ '_': {
@@ -285,19 +284,22 @@ call ddc#custom#patch_global('sourceOptions', {
   \})
 
 call ddc#custom#patch_filetype(
-  \ ['c', 'cpp', 'hpp'],
+  \ ['c', 'h', 'cpp', 'hpp'],
   \ 'sources',
-  \ ['around', 'clangd'])
+  \ ['around', 'ale', 'ctags', 'nvim-lsp'])
+
+call ddc#custom#patch_filetype(
+  \ ['c', 'h', 'cpp', 'hpp'],
+  \ 'sourceOptions', {
+  \ 'ale': {'mark': 'ale'},
+  \ 'ctags': {'mark': 't'},
+  \ 'nvim-lsp': {'mark': 'lsp'},
+  \ })
 
 call ddc#custom#patch_filetype(
   \ ['vim'],
   \ 'sources',
   \ ['necovim', 'around'])
-
-call ddc#custom#patch_filetype(
-  \ ['c', 'cpp', 'hpp'], 'sourceOptions', {
-  \ 'clangd': {'mark': 'cl'},
-  \ })
 
 " <TAB>: completion.
 inoremap <silent><expr> <TAB>
@@ -330,7 +332,7 @@ call ddc#custom#patch_global('sourceOptions', {
 " Plug 'Shougo/ddc-nvim-lsp'
 call ddc#custom#patch_global('sourceOptions', {
   \ 'nvim-lsp': {'mark': 'lsp'},
-  \ 'forceCompletionPattern': '\.\w*|:\w*|->\w*',
+  \ 'forceCompletionPattern': '\.\w*|::\w*|->\w*',
   \ })
 call ddc#custom#patch_global('sourceParams', {
   \ 'nvim-lsp': {'maxSize': 500},
@@ -399,7 +401,7 @@ let g:airline#extensions#tagbar#searchmethod = 'nearest-stl'
 
 " c/c++ linting
 let g:ale_linters = {
-\   'cpp': ['clangcheck', 'clang-format']
+\   'cpp': ['clangcheck', 'clangformat', 'clangtidy', 'clang', 'clangd']
 \}
 let g:ale_linter_aliases = {
 \  'h': 'cpp',
