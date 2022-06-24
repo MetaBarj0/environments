@@ -49,7 +49,6 @@ set incsearch    " show search matches as you type
 set history=1000 " remember more commands and search history
 
 " Folding
-set foldmethod=syntax
 hi Folded ctermbg=none ctermfg=blue
 
 call plug#begin()
@@ -77,13 +76,10 @@ Plug 'kshenoy/vim-signature'
 Plug 'mg979/vim-visual-multi'
 Plug 'sheerun/vim-polyglot'
 Plug 'myusuf3/numbers.vim'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-clang'
-Plug 'Shougo/neoinclude.vim'
 Plug 'shougo/neco-vim'
-Plug 'deoplete-plugins/deoplete-lsp'
 Plug 'tenfyzhong/CompleteParameter.vim'
-Plug 'sbdchd/neoformat'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-dispatch'
 Plug 'mfussenegger/nvim-dap'
@@ -207,31 +203,7 @@ let g:SignaturePurgeConfirmation = 1
 " Plug 'myusuf3/numbers.vim'
 let g:numbers_exclude = ['tagbar', 'nerdtree', 'undotree']
 
-" Plug 'Shougo/deoplete.nvim' configuration
-" Use deoplete.
-let g:deoplete#enable_at_startup = 1
-
-" Plug 'zchee/deoplete-clang'
-let g:deoplete#sources#clang#libclang_path = printf('%s/%s', $ROOTMOUNT, 'clang64/bin/libclang.dll')
-let g:deoplete#sources#clang#clang_header  = printf('%s/%s', $ROOTMOUNT, 'clang64/lib/clang/14.0.4/include')
-" Project-specific settings
-" create a .clang file in the project directory and put:
-" compilation_database = <path to compilation_database>
-
-" Plug 'Shougo/neoinclude.vim' configuration
-augroup neocomplete
-  au!
-  au BufEnter *.h,*.hpp,*.hxx,*.h :NeoIncludeMakeCache %
-augroup END
-let g:neoinclude#ctags_commands = {
-  \ '_' : 'ctags'
-  \ }
-
 " Plug 'shougo/neco-vim' configuration
-
-" Plug 'deoplete-plugins/deoplete-lsp' configuration
-let g:deoplete#lsp#handler_enabled          = 1
-let g:deoplete#lsp#use_icons_for_candidates = 1
 
 " Plug 'tenfyzhong/CompleteParameter.vim'
 inoremap <silent><expr> ( complete_parameter#pre_complete("()")
@@ -247,7 +219,29 @@ let g:complete_parameter_log_level             = 5
 let g:complete_parameter_use_ultisnips_mapping = 0
 let g:complete_parameter_echo_signature        = 1
 
-" Plug 'sbdchd/neoformat'
+" Plug 'prabirshrestha/vim-lsp' configuration
+function! s:on_lsp_buffer_enabled() abort
+  setlocal omnifunc=lsp#complete
+  setlocal signcolumn=yes
+
+  set foldmethod=expr
+    \ foldexpr=lsp#ui#vim#folding#foldexpr()
+    \ foldtext=lsp#ui#vim#folding#foldtext()
+
+  " ALE takes care of linting stuff
+  let g:lsp_diagnostics_enabled = 0
+
+  highlight lspReference ctermfg=red ctermbg=green
+
+  " refer to doc to add more commands
+endfunction
+
+" Plug 'mattn/vim-lsp-settings' configuration
+let g:lsp_settings_servers_dir = printf('%s\%s', $XDG_DATA_HOME, 'vim-lsp-servers')
+
+" deno's hover capabilities
+let g:lsp_settings_filetype_typescript = ['deno']
+let g:markdown_fenced_languages = ['ts=typescript']
 
 " Plug 'w0rp/ale' configuration
 " ALE stuff
