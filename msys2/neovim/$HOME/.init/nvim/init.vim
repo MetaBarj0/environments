@@ -76,7 +76,6 @@ Plug 'kshenoy/vim-signature'
 Plug 'mg979/vim-visual-multi'
 Plug 'sheerun/vim-polyglot'
 Plug 'myusuf3/numbers.vim'
-Plug 'shougo/neco-vim'
 Plug 'tenfyzhong/CompleteParameter.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
@@ -84,6 +83,8 @@ Plug 'vim-denops/denops.vim'
 Plug 'vim-denops/denops-helloworld.vim'
 Plug 'Shougo/pum.vim'
 Plug 'Shougo/ddc.vim'
+Plug 'tani/ddc-fuzzy'
+Plug 'shougo/neco-vim'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-dispatch'
 Plug 'mfussenegger/nvim-dap'
@@ -206,8 +207,6 @@ let g:SignaturePurgeConfirmation = 1
 
 " Plug 'myusuf3/numbers.vim'
 let g:numbers_exclude = ['tagbar', 'nerdtree', 'undotree']
-
-" Plug 'shougo/neco-vim' configuration
 
 " Plug 'tenfyzhong/CompleteParameter.vim'
 inoremap <silent><expr> ( complete_parameter#pre_complete("()")
@@ -392,13 +391,14 @@ inoremap <PageUp>   <Cmd>call pum#map#insert_relative_page(-1)<CR>
 " Plug 'Shougo/ddc.vim' configuration
 " Customize global settings
 " sources
-call ddc#custom#patch_global('sources', [])
+call ddc#custom#patch_global('sources', ['necovim'])
 
 " filters
 call ddc#custom#patch_global('sourceOptions', {
       \ '_': {
-      \   'matchers': [],
-      \   'sorters': []},
+      \ 'matchers':   ['matcher_fuzzy'],
+      \ 'sorters':    ['sorter_fuzzy']},
+      \ 'converters': ['converter_fuzzy']
       \ })
 
 " " Change source options
@@ -431,3 +431,26 @@ inoremap <expr><S-TAB>  ddc#map#pum_visible() ? '<C-p>' : '<C-h>'
 
 " Use ddc.
 call ddc#enable()
+
+" Plug 'tani/ddc-fuzzy' configuration
+call ddc#custom#patch_global('completionMenu', 'pum.vim')
+call ddc#custom#patch_global('filterParams', {
+  \   'matcher_fuzzy': {
+  \   'splitMode': 'word'
+  \  },
+  \  'converter_fuzzy': {
+  \    'hlGroup': 'SpellBad'
+  \  }
+  \})
+
+" Plug 'shougo/neco-vim' configuration
+if !exists('g:necovim#complete_functions')
+  let g:necovim#complete_functions = {}
+endif
+
+let g:necovim#complete_functions.Ref = 'ref#complete'
+
+call ddc#custom#patch_global('sourceOptions', {
+  \   'necovim': {'mark': 'vim'}
+  \ })
+
