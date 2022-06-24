@@ -80,6 +80,10 @@ Plug 'shougo/neco-vim'
 Plug 'tenfyzhong/CompleteParameter.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
+Plug 'vim-denops/denops.vim'
+Plug 'vim-denops/denops-helloworld.vim'
+Plug 'Shougo/pum.vim'
+Plug 'Shougo/ddc.vim'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-dispatch'
 Plug 'mfussenegger/nvim-dap'
@@ -223,6 +227,7 @@ let g:complete_parameter_echo_signature        = 1
 function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
   setlocal signcolumn=yes
+  if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
 
   set foldmethod=expr
     \ foldexpr=lsp#ui#vim#folding#foldexpr()
@@ -231,10 +236,16 @@ function! s:on_lsp_buffer_enabled() abort
   " ALE takes care of linting stuff
   let g:lsp_diagnostics_enabled = 0
 
-  highlight lspReference ctermfg=red ctermbg=green
+  highlight lspReference ctermfg=none ctermbg=blue
 
   " refer to doc to add more commands
 endfunction
+
+augroup lsp_install
+    au!
+    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
 
 " Plug 'mattn/vim-lsp-settings' configuration
 let g:lsp_settings_servers_dir = printf('%s\%s', $XDG_DATA_HOME, 'vim-lsp-servers')
@@ -363,3 +374,60 @@ dap.configurations.cpp = {
 dap.configurations.c = dap.configurations.cpp
 
 EOI
+
+" Plug 'vim-denops/denops.vim' configuration
+
+" Plug 'vim-denops/denops-helloworld.vim' configuration
+
+" Plug 'Shougo/pum.vim' configuration
+inoremap <Tab>      <Cmd>call pum#map#insert_relative(+1)<CR>
+inoremap <S-Tab>    <Cmd>call pum#map#insert_relative(-1)<CR>
+inoremap <C-n>      <Cmd>call pum#map#insert_relative(+1)<CR>
+inoremap <C-p>      <Cmd>call pum#map#insert_relative(-1)<CR>
+inoremap <C-y>      <Cmd>call pum#map#confirm()<CR>
+inoremap <C-e>      <Cmd>call pum#map#cancel()<CR>
+inoremap <PageDown> <Cmd>call pum#map#insert_relative_page(+1)<CR>
+inoremap <PageUp>   <Cmd>call pum#map#insert_relative_page(-1)<CR>
+
+" Plug 'Shougo/ddc.vim' configuration
+" Customize global settings
+" sources
+call ddc#custom#patch_global('sources', [])
+
+" filters
+call ddc#custom#patch_global('sourceOptions', {
+      \ '_': {
+      \   'matchers': [],
+      \   'sorters': []},
+      \ })
+
+" " Change source options
+" call ddc#custom#patch_global('sourceOptions', {
+"       \ 'around': {'mark': 'A'},
+"       \ })
+" call ddc#custom#patch_global('sourceParams', {
+"       \ 'around': {'maxSize': 500},
+"       \ })
+
+" " Customize settings on a filetype
+" call ddc#custom#patch_filetype(['c', 'cpp'], 'sources', ['around', 'clangd'])
+" call ddc#custom#patch_filetype(['c', 'cpp'], 'sourceOptions', {
+"       \ 'clangd': {'mark': 'clangd'},
+"       \ })
+" call ddc#custom#patch_filetype('markdown', 'sourceParams', {
+"       \ 'around': {'maxSize': 500},
+"       \ })
+
+" Mappings
+
+" <TAB>: completion.
+inoremap <silent><expr> <TAB>
+  \ ddc#map#pum_visible() ? '<C-n>' :
+  \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
+  \ '<TAB>' : ddc#map#manual_complete()
+
+" <S-TAB>: completion back.
+inoremap <expr><S-TAB>  ddc#map#pum_visible() ? '<C-p>' : '<C-h>'
+
+" Use ddc.
+call ddc#enable()
