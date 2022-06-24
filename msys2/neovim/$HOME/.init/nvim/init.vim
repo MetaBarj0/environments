@@ -77,18 +77,13 @@ Plug 'kshenoy/vim-signature'
 Plug 'mg979/vim-visual-multi'
 Plug 'sheerun/vim-polyglot'
 Plug 'myusuf3/numbers.vim'
-Plug 'vim-denops/denops.vim'
-Plug 'vim-denops/denops-helloworld.vim'
-Plug 'Shougo/pum.vim'
-Plug 'Shougo/ddc.vim'
-Plug 'Shougo/ddc-around'
-Plug 'tani/ddc-fuzzy'
-Plug 'Shougo/neco-vim'
-Plug 'Shougo/ddc-nvim-lsp'
-Plug 'statiolake/ddc-ale'
-Plug 'delphinus/ddc-ctags'
-Plug 'tani/ddc-path'
-Plug 'Shougo/ddc-cmdline'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-clang'
+Plug 'Shougo/neoinclude.vim'
+Plug 'shougo/neco-vim'
+Plug 'deoplete-plugins/deoplete-lsp'
+Plug 'tenfyzhong/CompleteParameter.vim'
+Plug 'sbdchd/neoformat'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-dispatch'
 Plug 'mfussenegger/nvim-dap'
@@ -212,160 +207,47 @@ let g:SignaturePurgeConfirmation = 1
 " Plug 'myusuf3/numbers.vim'
 let g:numbers_exclude = ['tagbar', 'nerdtree', 'undotree']
 
-" Plug 'vim-denops/denops.vim' configuration
-" install deno to make all ddc plugin work
-" curl -fsSL https://deno.land/install.sh | sh
+" Plug 'Shougo/deoplete.nvim' configuration
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
 
-" Plug 'vim-denops/denops-helloworld.vim' configuration
+" Plug 'zchee/deoplete-clang'
+let g:deoplete#sources#clang#libclang_path = printf('%s/%s', $ROOTMOUNT, 'clang64/bin/libclang.dll')
+let g:deoplete#sources#clang#clang_header  = printf('%s/%s', $ROOTMOUNT, 'clang64/lib/clang/14.0.4/include')
+" Project-specific settings
+" create a .clang file in the project directory and put:
+" compilation_database = <path to compilation_database>
 
-" Plug 'Shougo/pum.vim'
-inoremap <Tab>      <Cmd>call pum#map#insert_relative(+1)<CR>
-inoremap <S-Tab>    <Cmd>call pum#map#insert_relative(-1)<CR>
-inoremap <C-n>      <Cmd>call pum#map#insert_relative(+1)<CR>
-inoremap <C-p>      <Cmd>call pum#map#insert_relative(-1)<CR>
-inoremap <C-y>      <Cmd>call pum#map#confirm()<CR>
-inoremap <C-e>      <Cmd>call pum#map#cancel()<CR>
-inoremap <PageDown> <Cmd>call pum#map#insert_relative_page(+1)<CR>
-inoremap <PageUp>   <Cmd>call pum#map#insert_relative_page(-1)<CR>
-
-" Plug 'Shougo/ddc.vim' configuration
-" command line completion
-call ddc#custom#patch_global('completionMenu', 'pum.vim')
-call ddc#custom#patch_global('autoCompleteEvents',
-  \ ['InsertEnter', 'TextChangedI', 'TextChangedP', 'CmdlineChanged'])
-
-nnoremap : <Cmd>call CommandlinePre()<CR>:
-
-function! CommandlinePre() abort
-  cnoremap <Tab>   <Cmd>call pum#map#insert_relative(+1)<CR>
-  cnoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
-  cnoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
-  cnoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
-  cnoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
-  cnoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
-  " Overwrite sources
-  if !exists('b:prev_buffer_config')
-    let b:prev_buffer_config = ddc#custom#get_buffer()
-  endif
-  call ddc#custom#patch_buffer('cmdlineSources', ['necovim', 'around'])
-  autocmd User DDCCmdlineLeave ++once call CommandlinePost()
-  autocmd InsertEnter <buffer> ++once call CommandlinePost()
-  " Enable command line completion
-  call ddc#enable_cmdline_completion()
-endfunction
-
-function! CommandlinePost() abort
-  silent! cunmap <Tab>
-  silent! cunmap <S-Tab>
-  silent! cunmap <C-n>
-  silent! cunmap <C-p>
-  silent! cunmap <C-y>
-  silent! cunmap <C-e>
-  " Restore sources
-  if exists('b:prev_buffer_config')
-    call ddc#custom#set_buffer(b:prev_buffer_config)
-    unlet b:prev_buffer_config
-  else
-    call ddc#custom#set_buffer({})
-  endif
-endfunction
-
-" registering ddc filters and sources
-call ddc#custom#patch_global(
-  \ 'sources',
-  \ ['around', 'necovim', 'nvim-lsp', 'ale', 'ctags', 'path', 'cmdline', 'clangd'])
-
-call ddc#custom#patch_global('sourceOptions', {
-  \ '_': {
-  \     'matchers': ['matcher_fuzzy'],
-  \     'sorters': ['sorter_fuzzy'],
-  \     'converters': ['converter_fuzzy']
+" Plug 'Shougo/neoinclude.vim' configuration
+augroup neocomplete
+  au!
+  au BufEnter *.h,*.hpp,*.hxx,*.h :NeoIncludeMakeCache %
+augroup END
+let g:neoinclude#ctags_commands = {
+  \ '_' : 'ctags'
   \ }
-  \})
 
-call ddc#custom#patch_filetype(
-  \ ['c', 'h', 'cpp', 'hpp'],
-  \ 'sources',
-  \ ['around', 'ale', 'ctags', 'nvim-lsp'])
+" Plug 'shougo/neco-vim' configuration
 
-call ddc#custom#patch_filetype(
-  \ ['c', 'h', 'cpp', 'hpp'],
-  \ 'sourceOptions', {
-  \ 'ale': {'mark': 'ale'},
-  \ 'ctags': {'mark': 't'},
-  \ 'nvim-lsp': {'mark': 'lsp'},
-  \ })
+" Plug 'deoplete-plugins/deoplete-lsp' configuration
+let g:deoplete#lsp#handler_enabled          = 1
+let g:deoplete#lsp#use_icons_for_candidates = 1
 
-call ddc#custom#patch_filetype(
-  \ ['vim'],
-  \ 'sources',
-  \ ['necovim', 'around'])
+" Plug 'tenfyzhong/CompleteParameter.vim'
+inoremap <silent><expr> ( complete_parameter#pre_complete("()")
+nmap <c-j> <Plug>(complete_parameter#goto_next_parameter)
+imap <c-j> <Plug>(complete_parameter#goto_next_parameter)
+smap <c-j> <Plug>(complete_parameter#goto_next_parameter)
+nmap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+imap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
+smap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
 
-" <TAB>: completion.
-inoremap <silent><expr> <TAB>
-  \ ddc#map#pum_visible() ? '<C-n>' :
-  \ (col('.') <= 1 <Bar><Bar> getline('.')[col('.') - 2] =~# '\s') ?
-  \ '<TAB>' : ddc#map#manual_complete()
+set cmdheight=2
+let g:complete_parameter_log_level             = 5
+let g:complete_parameter_use_ultisnips_mapping = 0
+let g:complete_parameter_echo_signature        = 1
 
-" <S-TAB>: completion back.
-inoremap <expr><S-TAB>  ddc#map#pum_visible() ? '<C-p>' : '<C-h>'
-
-" Use ddc.
-call ddc#enable()
-
-" close the preview window after completion is done.
-autocmd CompleteDone * silent! pclose!
-
-" Plug 'Shougo/ddc-around' configuration
-call ddc#custom#patch_global('sourceOptions', {
-  \ 'around': {'mark': 'ar'},
-  \ })
-call ddc#custom#patch_global('sourceParams', {
-      \ 'around': {'maxSize': 500},
-      \ })
-
-" Plug 'Shougo/necovim' configuration
-call ddc#custom#patch_global('sourceOptions', {
-  \ 'necovim': {'mark': 'vim'},
-  \ })
-
-" Plug 'Shougo/ddc-nvim-lsp'
-call ddc#custom#patch_global('sourceOptions', {
-  \ 'nvim-lsp': {'mark': 'lsp'},
-  \ 'forceCompletionPattern': '\.\w*|::\w*|->\w*',
-  \ })
-call ddc#custom#patch_global('sourceParams', {
-  \ 'nvim-lsp': {'maxSize': 500},
-  \ })
-
-" Plug 'statiolake/ddc-ale' configuration
-call ddc#custom#patch_global('sourceParams',
-  \ {'ale': {'cleanResultsWhitespace': v:true}})
-call ddc#custom#patch_global('sourceOptions', {
-  \ 'ale': {'mark': 'ale'},
-  \ })
-
-" Plug 'delphinus/ddc-ctags' configuration
-call ddc#custom#patch_global('sourceOptions', {
-  \ 'ctags': {'mark': 'ctg'},
-  \ })
-
-" Plug 'tani/ddc-path' configuration
-call ddc#custom#patch_global('sourceOptions', {
-  \   'path': {'mark': 'P'},
-  \ })
-call ddc#custom#patch_global('sourceParams', {
-  \   'path': {
-  \     'cmd': ['find', '--max-depth', '5'],
-  \   }
-  \ })
-
-" Plug 'Shougo/ddc-cmdline' configuration
-call ddc#custom#patch_global('sourceOptions', {
-  \   'cmdline': {
-    \     'mark': 'cli',
-  \   }
-  \ })
+" Plug 'sbdchd/neoformat'
 
 " Plug 'w0rp/ale' configuration
 " ALE stuff
