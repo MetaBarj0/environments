@@ -66,6 +66,15 @@ ctag is fundamental too and used in neovim plugins
 
 - `pacman -S mingw-w64-clang-x86_64-universal-ctags-git`
 
+vim-plug is the package manager for neovim:
+
+`sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'`
+
+deno, the modern typescript engine is also necessary for certain vim plugins
+
+`curl -fsSL https://deno.land/install.sh | sh`
+
 ## External packages
 
 Essentially, neovim :
