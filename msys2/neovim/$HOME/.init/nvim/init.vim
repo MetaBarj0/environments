@@ -128,6 +128,7 @@ let g:airline_right_sep                   = ''
 
 " Plugin 'vim-airline/vim-airline-themes' configuration
 let g:airline_theme = 'light'
+" let g:airline_theme = 'dark'
 
 " Plug 'majutsushi/tagbar' configuration
 nmap <leader><C-t>  :TagbarOpen<CR> :wincmd p <CR>
