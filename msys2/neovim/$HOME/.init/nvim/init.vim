@@ -310,7 +310,7 @@ let g:airline#extensions#tagbar#searchmethod = 'nearest-stl'
 
 " c/c++ linting
 let g:ale_linters = {
-\   'cpp': ['clangcheck', 'clangformat', 'clangtidy', 'clang', 'clangd']
+\   'cpp': ['clangtidy']
 \}
 let g:ale_linter_aliases = {
 \  'h': 'cpp',
