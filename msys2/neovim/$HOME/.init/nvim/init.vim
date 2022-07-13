@@ -1,3 +1,6 @@
+" Pmenu override
+hi Pmenu ctermbg=Magenta
+
 " light environment, if dark, change those values
 set background=light
 hi Visual ctermbg=White
