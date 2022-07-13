@@ -63,7 +63,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'majutsushi/tagbar'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-commentary'
 Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch.vim'
@@ -95,6 +94,9 @@ Plug 'Shougo/ddc-cmdline'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-dispatch'
 Plug 'mfussenegger/nvim-dap'
+" FIXME: the following may fail, restart vim, then execute the do command as a
+"        workaround
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 call plug#end()
 
 " Plug 'scrooloose/nerdtree' configuration
@@ -139,8 +141,6 @@ nmap <leader><C-t>c :TagbarClose<CR>
 nmap <leader><C-t>s :TagbarShowTag<CR>
 let g:tagbar_autofocus = 1
 let g:tagbar_iconchars = ['▶', '▼']
-
-" Plug 'ctrlpvim/ctrlp.vim' configuration
 
 " Plug 'tpope/vim-commentary' configuration
 
@@ -536,3 +536,5 @@ call ddc#custom#patch_global('sourceOptions', {
   \   }
   \ })
 
+" Plug 'liuchengxu/vim-clap' configuration
+noremap <C-p> :Clap <CR>

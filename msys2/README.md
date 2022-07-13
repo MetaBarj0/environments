@@ -48,14 +48,14 @@ Those packages can be installed using pacman:
 This package group contains a lot of packages to deal with
 LLVM:
 
-- mingw-w64-clang-x86_64-toolchain
+`pacman -S mingw-w64-clang-x86_64-toolchain`
 
 Issue `pacman -Sg mingw-w64-clang-x86_64-toolchain` to see each
 package that is included in this group.
 
 cmake is also great:
 
-- mingw-w64-clang-x86_64-cmake
+`pacman -S mingw-w64-clang-x86_64-cmake`
 
 Python's pip utility is important too, especially for neovim integration
 
@@ -64,7 +64,7 @@ Python's pip utility is important too, especially for neovim integration
 
 ctag is fundamental too and used in neovim plugins
 
-- `pacman -S mingw-w64-clang-x86_64-universal-ctags-git`
+`pacman -S mingw-w64-clang-x86_64-universal-ctags-git`
 
 vim-plug is the package manager for neovim:
 
@@ -74,6 +74,10 @@ vim-plug is the package manager for neovim:
 deno, the modern typescript engine is also necessary for certain vim plugins
 
 `curl -fsSL https://deno.land/install.sh | sh`
+
+ripgrep, a fast command line search tool
+
+`pacman -S mingw-w64-clang-x86_64-ripgrep`
 
 ## External packages
 
