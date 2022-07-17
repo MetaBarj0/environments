@@ -467,3 +467,4 @@ call ddc#custom#patch_global('sourceOptions', {
 
 " Plug 'liuchengxu/vim-clap' configuration
 noremap <C-p> :Clap <CR>
+let g:clap_theme = 'material_design_dark'
