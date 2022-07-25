@@ -78,7 +78,6 @@ Plug 'kshenoy/vim-signature'
 Plug 'mg979/vim-visual-multi'
 Plug 'sheerun/vim-polyglot'
 Plug 'myusuf3/numbers.vim'
-Plug 'tenfyzhong/CompleteParameter.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 Plug 'vim-denops/denops.vim'
@@ -214,20 +213,6 @@ let g:SignaturePurgeConfirmation = 1
 
 " Plug 'myusuf3/numbers.vim'
 let g:numbers_exclude = ['tagbar', 'nerdtree', 'undotree']
-
-" Plug 'tenfyzhong/CompleteParameter.vim'
-inoremap <silent><expr> ( complete_parameter#pre_complete("()")
-nmap <c-j> <Plug>(complete_parameter#goto_next_parameter)
-imap <c-j> <Plug>(complete_parameter#goto_next_parameter)
-smap <c-j> <Plug>(complete_parameter#goto_next_parameter)
-nmap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
-imap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
-smap <c-k> <Plug>(complete_parameter#goto_previous_parameter)
-
-set cmdheight=2
-let g:complete_parameter_log_level             = 5
-let g:complete_parameter_use_ultisnips_mapping = 0
-let g:complete_parameter_echo_signature        = 1
 
 " Plug 'prabirshrestha/vim-lsp' configuration
 function! s:on_lsp_buffer_enabled() abort
