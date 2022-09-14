@@ -21,6 +21,12 @@ In the `fonts` sub-folder, one can find the `Husklug` NerdFont in all its varian
 read the related `README.md` file in this sub-folder to get a grasp on how to install this
 awesome font.
 
+### Bash
+
+The bash subdirectory contains everything you'll need to go further. Make sure
+to edit `.bashrc` especially the path part regarding version of software you
+install (for instance NodeJS)
+
 ### msys2extra
 
 This folder does not contain configuration files but various tools and scripts.
@@ -31,6 +37,12 @@ Please, refer to the `README.md` file of this folder to learn more.
 It may be possible that access mod for the `.ssh` directory won't be correct
 if one copies the folder from the repository to its `$HOME` folder. Please
 refer to the ssh documentation if something is going weird for you.
+
+#### Generating your keys
+
+Of course no keys are provided within this repository. You have to generate
+your own. Feel free to take a look at various documentation on that topic to
+get a grasp on how to do it. Don't worry, it's kinda easy.
 
 ## Essential packages
 
@@ -90,3 +102,23 @@ And also NodeJS:
 `https://nodejs.org/en/download/`
 
 NodeJs is used by neovim for some of its plugins
+
+### A word about neovim
+
+First you're gonna have to build it.
+It can be built without a hiccup using gcc, that is, by using the mingw64
+flavor of msys2. Follow build instruction with scrutiny and everything gonna be
+alright.
+Second, in order to make the provided configuration work, you'll have to
+install all plugins that are specified in the configuration file `init.vim`
+first.
+It means that you'll have either to comment or delete everything that is below
+the Plug installation section, install plugin using `:PlugInstall`, quit
+vim, restore commented or deleted content, then restart neovim, fully
+configured.
+
+## Remaining configuration
+
+Everything you need is located in its very own sub directory under the `msys2`
+one. You only need to copy paste it in the right location to make things
+working.
