@@ -93,6 +93,7 @@ Plug 'Shougo/ddc-cmdline'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-dispatch'
 Plug 'bfrg/vim-cpp-modern'
+Plug 'tpope/vim-abolish'
 Plug 'mfussenegger/nvim-dap'
 " FIXME: the following may fail, restart vim, then execute the do command as a
 "        workaround
@@ -318,6 +319,9 @@ let g:tmux_session = 1
 " Plug 'vim-denops/denops-helloworld.vim' configuration
 
 " Plug 'Shougo/pum.vim' configuration
+" Perform a plugin installation if the function below is undefined
+au FuncUndefined ddc#custom#patch_global :PlugInstall
+
 call ddc#custom#patch_global('completionMenu', 'pum.vim')
 
 inoremap <Tab>      <Cmd>call pum#map#insert_relative(+1)<CR>
@@ -470,5 +474,7 @@ let g:cpp_member_highlight = 1
 " Put all standard C and C++ keywords under Vim's highlight group 'Statement'
 " (affects both C and C++ files)
 let g:cpp_simple_highlight = 1
+
+" Plug 'tpope/vim-abolish' configuration
 
 " Plug 'mfussenegger/nvim-dap' configuration

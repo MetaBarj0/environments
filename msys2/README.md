@@ -109,13 +109,7 @@ First you're gonna have to build it.
 It can be built without a hiccup using gcc, that is, by using the mingw64
 flavor of msys2. Follow build instruction with scrutiny and everything gonna be
 alright.
-Second, in order to make the provided configuration work, you'll have to
-install all plugins that are specified in the configuration file `init.vim`
-first.
-It means that you'll have either to comment or delete everything that is below
-the Plug installation section, install plugin using `:PlugInstall`, quit
-vim, restore commented or deleted content, then restart neovim, fully
-configured.
+Alternatively, you can use a prebuilt package but it is not tested.
 
 ## Remaining configuration
 
