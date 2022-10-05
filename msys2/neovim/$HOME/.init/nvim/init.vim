@@ -95,6 +95,8 @@ Plug 'tpope/vim-dispatch'
 Plug 'bfrg/vim-cpp-modern'
 Plug 'tpope/vim-abolish'
 Plug 'mfussenegger/nvim-dap'
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'gabriel-gardner/ddc-omnisharp-vim'
 " FIXME: the following may fail, restart vim, then execute the do command as a
 "        workaround
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
@@ -298,7 +300,8 @@ let g:airline#extensions#tagbar#searchmethod = 'nearest-stl'
 
 " c/c++ linting
 let g:ale_linters = {
-\   'cpp': ['clangd']
+\   'cpp': ['clangd'],
+\   'cs': ['OmniSharp']
 \}
 let g:ale_linter_aliases = {
 \  'h': 'cpp',
@@ -342,7 +345,8 @@ call ddc#custom#patch_global('sources', [
   \ 'around',
   \ 'vim-lsp',
   \ 'cmdline-history',
-  \ 'cmdline'])
+  \ 'cmdline',
+  \ 'omnisharp-vim'])
 
 " specific stuff for command line completion
 nnoremap : <Cmd>call CommandlinePre()<CR>:
@@ -566,3 +570,12 @@ dap.listeners.after['event_terminated']['me'] = function()
   keymap_restore = {}
 end
 EOF
+
+" Plug 'OmniSharp/omnisharp-vim' configuration
+let g:OmniSharp_server_install = $XDG_DATA_HOME . '\omnisharp-vim\omnisharp-roslyn'
+let g:OmniSharp_server_use_net6 = 1
+
+" Plug 'gabriel-gardner/ddc-omnisharp-vim' configuration
+call ddc#custom#patch_global('sourceOptions', {
+  \ 'omnisharp-vim': {'mark': 'OS'},
+  \ })

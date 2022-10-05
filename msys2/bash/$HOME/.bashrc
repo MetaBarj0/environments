@@ -94,7 +94,7 @@ fi
 # Some example functions:
 #
 # a) function settitle
-#  settitle ()
+# settitle ()
 # {
 #   echo -ne "\e]2;$@\a\e]1;$@\a";
 # }
@@ -103,12 +103,18 @@ fi
 . ~/.bashrc_ssh-auth.sh
 . ~/.bashrc_cd.sh
 
+export MANPATH=$MANPATH:/usr/local/share/man
+
 export XDG_CONFIG_HOME=$(cygpath -w ~/.init)
 export XDG_DATA_HOME=$(cygpath -w ~/.local/share)
 export XDG_STATE_HOME=$(cygpath -w ~/.local/state)
 
-export PATH=$PATH:/opt/node-v18.4.0-win-x64
 export PATH=$PATH:/opt/msys2extra/bin
+
+export PATH=$PATH:/opt/node-v18.9.0-win-x64
+
 export PATH=$PATH:~/.deno/bin
 
-export MANPATH=$MANPATH:/usr/local/share/man
+export PATH=$PATH:/opt/dotnet-sdk-6.0.401-win-x64
+export PATH=$PATH:/opt/dotnet-sdk-6.0.401-win-x64/sdk/6.0.401
+export DOTNET_ROOT=$(cygpath -m $(dirname $(which dotnet)))
