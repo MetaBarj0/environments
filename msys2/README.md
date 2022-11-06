@@ -5,8 +5,8 @@ MSYS2 environment configuration essential and external packages.
 ## Configuration
 
 Under the msys2 folder are various sub-folders containing configuration for various softwares.
-Several of configuratio files and folder are hidden (prefixed by '.') that is why those
-folders may at first look empty.
+Many configuration files and folders are hidden (prefixed by '.') that is why those
+items may at first look empty.
 
 ### Nomenclatura
 
@@ -54,6 +54,7 @@ Those packages can be installed using pacman:
 - `pacman -S pkgfile`
 - `pacman -S tmux`
 - `pacman -S unzip`
+- `pacman -S winpty`
 
 ## Development activities packages and installations
 
