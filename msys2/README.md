@@ -104,6 +104,13 @@ And also NodeJS:
 
 NodeJs is used by neovim for some of its plugins
 
+### A word about NodeJS
+
+The `.npmrc` file in the `nodejs/$HOME` directory set both the `cache` and the
+`prefix` variable to the home folder. The version you have installed may differ
+from the one specified in the `PATH` environment variable that is set in
+`.bashrc`. Setup it accordingly.
+
 ### A word about neovim
 
 First you're gonna have to build it.
@@ -117,3 +124,11 @@ Alternatively, you can use a prebuilt package but it is not tested.
 Everything you need is located in its very own sub directory under the `msys2`
 one. You only need to copy paste it in the right location to make things
 working.
+
+## Other development activities
+
+This environment has so far a limited support for `dotnet` development (debug
+does not work pretty well). You can see in the `.bashrc` file that there is a
+path registered in the `PATH` environment variable thus, ensure to download the
+dotnet sdk if you want to use it. You may have to adjust paths regarding the
+version of the dotnet sdk you are using

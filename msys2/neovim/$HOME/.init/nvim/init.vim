@@ -84,6 +84,7 @@ Plug 'vim-denops/denops.vim'
 Plug 'vim-denops/denops-helloworld.vim'
 Plug 'Shougo/pum.vim'
 Plug 'Shougo/ddc.vim'
+Plug 'Shougo/ddc-ui-pum'
 Plug 'tani/ddc-fuzzy'
 Plug 'shougo/neco-vim'
 Plug 'Shougo/ddc-around'
@@ -337,6 +338,9 @@ inoremap <C-e>      <Cmd>call pum#map#cancel()<CR>
 inoremap <C-PageDown> <Cmd>call pum#map#insert_relative_page(+1)<CR>
 inoremap <C-PageUp>   <Cmd>call pum#map#insert_relative_page(-1)<CR>
 
+" Plug 'Shougo/ddc-ui-pum' configuration
+call ddc#custom#patch_global('ui', 'pum')
+
 " Plug 'Shougo/ddc.vim' configuration
 " Customize global settings
 " sources
@@ -357,7 +361,7 @@ function! CommandlinePre() abort
 
   cnoremap <expr> <Tab>
     \ pum#visible() ? '<Cmd>call pum#map#insert_relative(+1)<CR>' :
-      \ ddc#manual_complete()
+      \ ddc#map#manual_complete()
   cnoremap <S-Tab> <Cmd>call pum#map#insert_relative(-1)<CR>
   cnoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
   cnoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
@@ -579,3 +583,4 @@ let g:OmniSharp_server_use_net6 = 1
 call ddc#custom#patch_global('sourceOptions', {
   \ 'omnisharp-vim': {'mark': 'OS'},
   \ })
+

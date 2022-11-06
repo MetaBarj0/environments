@@ -28,3 +28,5 @@ alias l='ls -CF'              #
 alias s='cd ..'
 
 alias g='git'
+
+alias ncu='ncu --prefix ~/.npm-prefix'
