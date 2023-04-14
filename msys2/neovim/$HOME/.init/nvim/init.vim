@@ -84,10 +84,10 @@ Plug 'vim-denops/denops.vim'
 Plug 'vim-denops/denops-helloworld.vim'
 Plug 'Shougo/pum.vim'
 Plug 'Shougo/ddc.vim'
-Plug 'Shougo/ddc-ui-pum'
 Plug 'tani/ddc-fuzzy'
+Plug 'Shougo/ddc-ui-pum'
 Plug 'shougo/neco-vim'
-Plug 'Shougo/ddc-around'
+Plug 'Shougo/ddc-source-around'
 Plug 'shun/ddc-vim-lsp'
 Plug 'Shougo/ddc-cmdline-history'
 Plug 'Shougo/ddc-cmdline'
@@ -96,8 +96,6 @@ Plug 'tpope/vim-dispatch'
 Plug 'bfrg/vim-cpp-modern'
 Plug 'tpope/vim-abolish'
 Plug 'mfussenegger/nvim-dap'
-Plug 'OmniSharp/omnisharp-vim'
-Plug 'gabriel-gardner/ddc-omnisharp-vim'
 " FIXME: the following may fail, restart vim, then execute the do command as a
 "        workaround
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
@@ -327,7 +325,7 @@ let g:tmux_session = 1
 " Perform a plugin installation if the function below is undefined
 au FuncUndefined ddc#custom#patch_global :PlugInstall
 
-call ddc#custom#patch_global('completionMenu', 'pum.vim')
+call ddc#custom#patch_global('ui', 'pum.vim')
 
 inoremap <Tab>      <Cmd>call pum#map#insert_relative(+1)<CR>
 inoremap <C-Tab>    <Cmd>call pum#map#insert_relative(-1)<CR>
@@ -349,8 +347,7 @@ call ddc#custom#patch_global('sources', [
   \ 'around',
   \ 'vim-lsp',
   \ 'cmdline-history',
-  \ 'cmdline',
-  \ 'omnisharp-vim'])
+  \ 'cmdline'])
 
 " specific stuff for command line completion
 nnoremap : <Cmd>call CommandlinePre()<CR>:
@@ -398,11 +395,11 @@ endfunction
 call ddc#custom#patch_global('cmdlineSources', ['cmdline'])
 
 " global filters
-call ddc#custom#patch_global('sourceOptions', {
-  \   '_': {
-  \     'matchers':   ['matcher_fuzzy'],
-  \     'sorters':    ['sorter_fuzzy']},
-  \     'converters': ['converter_fuzzy']
+call ddc#custom#patch_global('sourceOptions', #{
+  \   _: #{
+  \     matchers   : ['matcher_fuzzy'],
+  \     sorters    : ['sorter_fuzzy'],
+  \     converters : ['converter_fuzzy']}
   \ })
 
 call ddc#custom#patch_global('autoCompleteEvents', [
@@ -414,14 +411,17 @@ call ddc#custom#patch_global('autoCompleteEvents', [
 call ddc#enable()
 
 " Plug 'tani/ddc-fuzzy' configuration
-call ddc#custom#patch_global('filterParams', {
-  \   'matcher_fuzzy': {
-  \   'splitMode': 'word'
-  \  },
-  \  'converter_fuzzy': {
-  \    'hlGroup': 'CursorLine'
-  \  }
-  \})
+call ddc#custom#patch_global('filterParams', #{
+  \    matcher_fuzzy: #{
+  \      splitMode: 'word'
+  \   }
+  \ })
+
+call ddc#custom#patch_global('filterParams', #{
+  \    converter_fuzzy: #{
+  \      hlGroup: 'CursorLine'
+  \   }
+  \ })
 
 " Plug 'shougo/neco-vim' configuration
 if !exists('g:necovim#complete_functions')
@@ -430,13 +430,13 @@ endif
 
 let g:necovim#complete_functions.Ref = 'ref#complete'
 
-call ddc#custom#patch_global('sourceOptions', {
-  \   'necovim': {'mark': '`v`'}
+call ddc#custom#patch_global('sourceOptions', #{
+  \   necovim: #{ mark: '`v`' }
   \ })
 
-" Plug 'Shougo/ddc-around' configuration
-call ddc#custom#patch_global('sourceOptions', {
-  \   'around': {'mark': '`a`'},
+" Plug 'Shougo/ddc-source-around' configuration
+call ddc#custom#patch_global('sourceOptions', #{
+  \   around: #{ mark: '`a`' },
   \ })
 
 call ddc#custom#patch_global('sourceParams', {
@@ -444,9 +444,10 @@ call ddc#custom#patch_global('sourceParams', {
   \ })
 
 " Plug 'shun/ddc-vim-lsp' configuration
-call ddc#custom#patch_global('sourceOptions', {
-  \   'vim-lsp': {
-  \     'mark': '`lsp`'},
+call ddc#custom#patch_global('sourceOptions', #{
+  \   vim-lsp: #{
+  \     mark: '`lsp`'
+  \   },
   \ })
 
 call ddc#custom#patch_global('sourceParams', {
@@ -454,14 +455,14 @@ call ddc#custom#patch_global('sourceParams', {
   \ })
 
 " Plug 'Shougo/ddc-cmdline-history' configuration
-call ddc#custom#patch_global('sourceOptions', {
-  \ 'cmdline-history': {'mark': 'hist'},
+call ddc#custom#patch_global('sourceOptions', #{
+  \ cmdline-history: #{ mark: '`hist`' },
   \ })
 
 " Plug 'Shougo/ddc-cmdline' configuration
-call ddc#custom#patch_global('sourceOptions', {
-  \   'cmdline': {
-  \     'mark': 'cmd',
+call ddc#custom#patch_global('sourceOptions', #{
+  \   cmdline: #{
+  \     mark: '`cmd`'
   \   }
   \ })
 
@@ -574,13 +575,4 @@ dap.listeners.after['event_terminated']['me'] = function()
   keymap_restore = {}
 end
 EOF
-
-" Plug 'OmniSharp/omnisharp-vim' configuration
-let g:OmniSharp_server_install = $XDG_DATA_HOME . '\omnisharp-vim\omnisharp-roslyn'
-let g:OmniSharp_server_use_net6 = 1
-
-" Plug 'gabriel-gardner/ddc-omnisharp-vim' configuration
-call ddc#custom#patch_global('sourceOptions', {
-  \ 'omnisharp-vim': {'mark': 'OS'},
-  \ })
 
