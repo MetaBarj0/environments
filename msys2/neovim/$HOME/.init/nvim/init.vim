@@ -33,6 +33,8 @@ set expandtab     " always use spaces instead of tab characters
 set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
 set autoindent    " always set autoindenting on
 set copyindent    " copy the previous indentation on autoindenting
+vnoremap < <gv
+vnoremap > >gv
 
 " editor options
 set backspace=indent,eol,start
