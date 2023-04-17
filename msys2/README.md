@@ -8,6 +8,13 @@ Under the msys2 folder are various sub-folders containing configuration for vari
 Many configuration files and folders are hidden (prefixed by '.') that is why those
 items may at first look empty.
 
+## Starting your system
+
+msys2 comes with several flavors. The choive is yours regarding the flavor you
+want to work with. For instance, if you plan to use the LLVM toolchain rather
+than the MingW one, you can start your msys2 instance using the `clang64.exe`
+program rather than the `mingw64.exe` program.
+
 ### Nomenclatura
 
 Some configuration folders contain a `$HOME` folder. This is a placeholder that must be replaced
@@ -38,23 +45,22 @@ It may be possible that access mod for the `.ssh` directory won't be correct
 if one copies the folder from the repository to its `$HOME` folder. Please
 refer to the ssh documentation if something is going weird for you.
 
+## Update the system first
+
+To be sure everything is up to date regarding your fresh msys2 installation,
+update the system using pacman:
+`pacman -Syu`
+
+## Essential packages
+
+Those packages can be installed using pacman:
+`pacman -S dos2unix git man-db pkgfile tmux unzip winpty`
+
 #### Generating your keys
 
 Of course no keys are provided within this repository. You have to generate
 your own. Feel free to take a look at various documentation on that topic to
 get a grasp on how to do it. Don't worry, it's kinda easy.
-
-## Essential packages
-
-Those packages can be installed using pacman:
-
-- `pacman -S dos2unix`
-- `pacman -S git`
-- `pacman -S man-db`
-- `pacman -S pkgfile`
-- `pacman -S tmux`
-- `pacman -S unzip`
-- `pacman -S winpty`
 
 ## Development activities packages and installations
 
