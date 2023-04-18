@@ -115,3 +115,8 @@ export PATH=$PATH:/opt/node-v19.9.0-win-x64
 export PATH=$PATH:~/.npm-prefix
 
 export PATH=$PATH:~/.deno/bin
+
+export PATH=$PATH:/opt/jdk-20/bin
+export JAVA_HOME=/opt/jdk-20/
+
+export PATH=$PATH:/opt/kotlin-compiler-1.8.20/bin
