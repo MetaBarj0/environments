@@ -115,3 +115,5 @@ export PATH=$PATH:/opt/node-v19.9.0-win-x64
 export PATH=$PATH:~/.npm-prefix
 
 export PATH=$PATH:~/.deno/bin
+
+export VULKAN_SDK=/opt/vulkan-sdk-1.3.239.0
