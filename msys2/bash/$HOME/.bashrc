@@ -116,4 +116,4 @@ export PATH=$PATH:~/.npm-prefix
 
 export PATH=$PATH:~/.deno/bin
 
-export VULKAN_SDK=/opt/vulkan-sdk-1.3.239.0
+export VULKAN_SDK="$(cygpath -w '/opt/vulkan-sdk-1.3.239.0')"
