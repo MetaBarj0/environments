@@ -130,10 +130,17 @@ let g:gitgutter_sign_removed_above_and_below = ''
 let g:gitgutter_sign_modified_removed        = ''
 
 " Plug 'vim-airline/vim-airline' configuration
+let g:airline_powerline_fonts             = 1
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
 let g:airline#extensions#tabline#enabled  = 1
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline_left_sep                    = ''
 let g:airline_right_sep                   = ''
+let g:airline_symbols.branch              = ''
 
 " Plugin 'vim-airline/vim-airline-themes' configuration
 let g:airline_theme = 'light'
@@ -302,7 +309,6 @@ let g:airline#extensions#tagbar#searchmethod = 'nearest-stl'
 " c/c++ linting
 let g:ale_linters = {
 \   'cpp': ['clangd'],
-\   'cs': ['OmniSharp']
 \}
 let g:ale_linter_aliases = {
 \  'h': 'cpp',
@@ -471,7 +477,6 @@ call ddc#custom#patch_global('sourceOptions', #{
 " Plug 'liuchengxu/vim-clap' configuration
 noremap <C-p> :Clap <CR>
 
-let g:clap_theme = 'material_design_dark'
 let g:clap_layout = { 'relative': 'editor' }
 
 " Plug 'bfrg/vim-cpp-modern' configuration
