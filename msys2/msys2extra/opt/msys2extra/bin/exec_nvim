@@ -11,6 +11,9 @@
 # - install a stable version using pacman: `pacman -S msys/winpty`
 # This script relies on the `rootmount` script located in the same
 # folder. See this script for more details.
+#
+# UPDATE: apparently, newer neovim builds do support executing through mintty
+# now. winpty is not necessary anymore for neovim execution.
 
 
 # TODO: get this chunk of code from a reachable script in /usr/local/bin
@@ -25,7 +28,8 @@ unset SHELL
 export ROOTMOUNT="$($thisdir/rootmount)"
 
 if [ ${#} -eq 0 ]; then
-  exec winpty nvim
+  # exec winpty nvim
+  exec nvim
 fi
 
 declare -a option_args
@@ -39,5 +43,5 @@ for arg in $@; do
   fi
 done
 
-exec winpty nvim ${option_args[@]} ${file_args[@]}
-
+# exec winpty nvim ${option_args[@]} ${file_args[@]}
+exec nvim ${option_args[@]} ${file_args[@]}
