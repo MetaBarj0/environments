@@ -76,6 +76,11 @@ cmake is also great:
 
 `pacman -S mingw-w64-clang-x86_64-cmake`
 
+Any serious programmer should strive to get fully automated test suites. One
+way to get strong ones is by using catch2:
+
+`pacman -S mingw-w64-clang-x86_64-catch`
+
 Python's pip utility is important too, especially for neovim integration
 
 - `pacman -S mingw-w64-clang-x86_64-python-pip`
