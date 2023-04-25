@@ -81,6 +81,11 @@ way to get strong ones is by using catch2:
 
 `pacman -S mingw-w64-clang-x86_64-catch`
 
+A good alternative to iostream and s?printf familly of function is fmt. Simple
+to use, robust and proven:
+
+`pacman -S mingw-w64-clang-x86_64-fmt`
+
 Python's pip utility is important too, especially for neovim integration
 
 - `pacman -S mingw-w64-clang-x86_64-python-pip`
