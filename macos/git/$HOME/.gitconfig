@@ -1,0 +1,36 @@
+# This is Git's per-user configuration file.
+[user]
+  name  = sebastien.levy
+  email = sebastien.levy@ringover.com
+
+[core]
+  editor = nvim
+
+[alias]
+  br   = branch
+  brv  = branch -vv
+  cc   = commit
+  ca   = commit --amend
+  sw   = switch
+  co   = checkout
+  rs   = restore
+  st   = status
+  fe   = fetch
+  fep  = fetch --prune
+  re   = rebase
+  rei  = rebase -i
+  rer  = rebase -r
+  ps   = push
+  psf  = push --force-with-lease
+  pl   = pull
+  plr  = pull --rebase
+  sth  = stash
+  stl  = stash list
+  stp  = stash pop
+  sta  = stash apply
+  std  = stash drop
+  nuke = clean -dfx
+  cl   = clone
+  l    = log
+  lg   = log --graph
+  lgo  = log --graph --format=oneline
