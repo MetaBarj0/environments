@@ -1,7 +1,10 @@
 # environments
-Various configuration file for various software in various environment
+Various configuration file for various softwares in various environment, mainly
+in terminal mode.
 
 Take a look at each environment's `README.md` file for more details.
 
-If you plan to create your own msys2 environment, you may have to clone or
-download this repository to easily access needed files.
+If you plan to create your own environment, you may have to clone or download
+this repository to easily access needed files.
+
+So far, windows with msys2 and macOS are supported environment.

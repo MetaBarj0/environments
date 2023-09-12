@@ -15,7 +15,7 @@ want to work with. For instance, if you plan to use the LLVM toolchain rather
 than the MingW one, you can start your msys2 instance using the `clang64.exe`
 program rather than the `mingw64.exe` program.
 
-### Nomenclatura
+### Terminology
 
 Some configuration folders contain a `$HOME` folder. This is a placeholder that must be replaced
 by your real home folder on your MSYS2 system (i.e. /home/john)
@@ -81,10 +81,14 @@ way to get strong ones is by using catch2:
 
 `pacman -S mingw-w64-clang-x86_64-catch`
 
-A good alternative to iostream and s?printf familly of function is fmt. Simple
+A good alternative to iostream and sprintf familly of function is fmt. Simple
 to use, robust and proven:
 
 `pacman -S mingw-w64-clang-x86_64-fmt`
+
+At the time of this writing, the standard library implement parts of the `fmt`
+library. However, some feature do not exist yet in the standard library:
+[What are the differences between libfmt and std::format?](https://stackoverflow.com/questions/63586747/what-are-the-differences-between-libfmt-and-stdformat).
 
 Python's pip utility is important too, especially for neovim integration
 
@@ -116,7 +120,8 @@ Essentially, neovim :
 
 And also NodeJS:
 
-`https://nodejs.org/en/download/`
+- `https://nodejs.org/en/download/`
+- `npm install -g neovim`
 
 NodeJs is used by neovim for some of its plugins
 
@@ -140,11 +145,3 @@ Alternatively, you can use a prebuilt package but it is not tested.
 Everything you need is located in its very own sub directory under the `msys2`
 one. You only need to copy paste it in the right location to make things
 working.
-
-## Other development activities
-
-This environment has so far a limited support for `dotnet` development (debug
-does not work pretty well). You can see in the `.bashrc` file that there is a
-path registered in the `PATH` environment variable thus, ensure to download the
-dotnet sdk if you want to use it. You may have to adjust paths regarding the
-version of the dotnet sdk you are using
