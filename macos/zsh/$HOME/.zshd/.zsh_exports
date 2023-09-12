@@ -3,3 +3,5 @@ export XDG_DATA_HOME=~/.local/share
 export XDG_STATE_HOME=~/.local/state
 export PATH=$PATH:~/.npm-prefix/bin
 
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+export NVIM_LLDB_VSCODE_PATH="$(which lldb-vscode)"
