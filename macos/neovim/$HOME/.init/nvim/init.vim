@@ -266,8 +266,8 @@ augroup lsp_install
 augroup END
 
 " Plug 'mattn/vim-lsp-settings' configuration
-let g:lsp_settings_servers_dir         = printf('%s\%s', $XDG_DATA_HOME, 'vim-lsp-servers')
-let g:lsp_settings_global_settings_dir = printf('%s\%s', $XDG_DATA_HOME, 'vim-lsp-settings')
+let g:lsp_settings_servers_dir         = printf('%s/%s', $XDG_DATA_HOME, 'vim-lsp-servers')
+let g:lsp_settings_global_settings_dir = printf('%s/%s', $XDG_DATA_HOME, 'vim-lsp-settings')
 
 " deno's hover capabilities
 let g:lsp_settings_filetype_typescript = ['deno']
