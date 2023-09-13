@@ -249,7 +249,7 @@ function! s:on_lsp_buffer_enabled() abort
       \ endif
   augroup END
 
-  highlight lspReference ctermfg=none ctermbg=blue
+  highlight lspReference ctermfg=none ctermbg=lightblue
   highlight PopupWindow ctermbg=lightblue ctermfg=none
   let g:lsp_diagnostics_enabled  = 1
   let g:lsp_text_edit_enabled    = 0
