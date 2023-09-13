@@ -7,6 +7,7 @@ hi Visual ctermbg=White
 " set background=dark
 " hi Visual ctermbg=Black
 highlight Pmenu ctermbg=lightgrey ctermfg=none
+highlight PmenuSel ctermbg=white ctermfg=none
 
 let mapleader=","
 
