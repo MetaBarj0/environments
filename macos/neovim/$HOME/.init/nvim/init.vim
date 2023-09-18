@@ -8,6 +8,7 @@ hi Visual ctermbg=White
 " hi Visual ctermbg=Black
 highlight Pmenu ctermbg=lightgrey ctermfg=none
 highlight PmenuSel ctermbg=white ctermfg=none
+highlight DiffText ctermfg=LightGrey
 
 let mapleader=","
 
