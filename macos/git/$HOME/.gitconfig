@@ -7,23 +7,31 @@
   editor = nvim
 
 [alias]
+  st   = status
   br   = branch
   brv  = branch -vv
   cc   = commit
   ca   = commit --amend
   sw   = switch
   co   = checkout
+  sco  = checkout --recurse-submodules
   rs   = restore
-  st   = status
   fe   = fetch
   fep  = fetch --prune
+  sfep = fetch --prune --recurse-submodules
   re   = rebase
   rei  = rebase -i
   rer  = rebase -r
   ps   = push
   psf  = push --force-with-lease
+  sps  = push --recurse-submodules=on-demand
   pl   = pull
   plr  = pull --rebase
+  spl  = pull --recurse-submodules
+  sub  = submodule
+  sde  = submodule deinit
+  sfe  = submodule foreach
+  sui  = submodule update --init --recursive
   sth  = stash
   stl  = stash list
   stp  = stash pop
