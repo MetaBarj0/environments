@@ -15,7 +15,7 @@ by your real home folder on your system (i.e. /home/john)
 
 ### zsh
 
-The bash subdirectory contains everything you'll need to go further. Make sure
+The zsh subdirectory contains everything you'll need to go further. Make sure
 to edit `.zshrc` and files located in `.zshd` directory especially the path
 part regarding version of software you install (for instance NodeJS)
 
@@ -32,7 +32,7 @@ If necessary, upgrade all installed packages on your system:
 ## Essential packages
 
 Those packages can be installed using homebrew:
-`brw install dos2unix git tmux`
+`brew install dos2unix git tmux`
 
 #### Generating your keys
 
