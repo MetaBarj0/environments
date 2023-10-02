@@ -42,3 +42,4 @@
   l    = log
   lg   = log --graph
   lgo  = log --graph --format=oneline
+  cp   = cherry-pick
