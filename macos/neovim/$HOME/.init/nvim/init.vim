@@ -106,6 +106,7 @@ Plug 'mfussenegger/nvim-dap'
 " FIXME: the following may fail, restart vim, then execute the do command as a
 "        workaround
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
+Plug 'vim-scripts/BufOnly.vim'
 call plug#end()
 
 " Plug 'scrooloose/nerdtree' configuration
