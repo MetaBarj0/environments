@@ -33,7 +33,7 @@ Alpine Linux.
 Those packages can be installed using your package manager:
 
 - tmux
-- open ssh
+- openssh
 
 #### Generating your keys
 
