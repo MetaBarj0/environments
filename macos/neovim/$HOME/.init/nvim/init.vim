@@ -2,13 +2,17 @@
 hi Pmenu ctermbg=Magenta
 
 " light environment, if dark, change those values
-set background=light
-hi Visual ctermbg=White
-" set background=dark
-" hi Visual ctermbg=Black
-highlight Pmenu ctermbg=lightgrey ctermfg=none
+" set background=light
+" hi Visual ctermbg=White
+" highlight Pmenu ctermbg=lightgrey ctermfg=none
+" highlight PmenuSel ctermbg=white ctermfg=none
+" highlight DiffText ctermfg=lightgrey
+" dark environment, if dark, change those values
+set background=dark
+hi Visual ctermbg=Black
+highlight Pmenu ctermbg=darkgrey ctermfg=none
 highlight PmenuSel ctermbg=white ctermfg=none
-highlight DiffText ctermfg=LightGrey
+highlight DiffText ctermfg=darkgrey
 
 let mapleader=","
 
