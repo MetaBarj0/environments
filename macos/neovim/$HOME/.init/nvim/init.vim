@@ -7,12 +7,16 @@ hi Pmenu ctermbg=Magenta
 " highlight Pmenu ctermbg=lightgrey ctermfg=none
 " highlight PmenuSel ctermbg=white ctermfg=none
 " highlight DiffText ctermfg=lightgrey
+" highlight lspReference ctermfg=none ctermbg=lightblue
+" highlight PopupWindow ctermbg=lightblue ctermfg=none
 " dark environment, if dark, change those values
 set background=dark
 hi Visual ctermbg=Black
 highlight Pmenu ctermbg=darkgrey ctermfg=none
 highlight PmenuSel ctermbg=white ctermfg=none
 highlight DiffText ctermfg=darkgrey
+highlight lspReference ctermfg=none ctermbg=darkblue
+highlight PopupWindow ctermbg=darkblue ctermfg=none
 
 let mapleader=","
 
@@ -259,8 +263,6 @@ function! s:on_lsp_buffer_enabled() abort
       \ endif
   augroup END
 
-  highlight lspReference ctermfg=none ctermbg=lightblue
-  highlight PopupWindow ctermbg=lightblue ctermfg=none
   let g:lsp_diagnostics_enabled  = 1
   let g:lsp_text_edit_enabled    = 0
   let g:lsp_tree_incoming_prefix = "← "
