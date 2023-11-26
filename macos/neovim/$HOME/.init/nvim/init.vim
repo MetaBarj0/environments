@@ -1,22 +1,28 @@
-" Pmenu override
-hi Pmenu ctermbg=Magenta
-
-" light environment, if dark, change those values
 " set background=light
-" hi Visual ctermbg=White
-" highlight Pmenu ctermbg=lightgrey ctermfg=none
-" highlight PmenuSel ctermbg=white ctermfg=none
-" highlight DiffText ctermfg=lightgrey
-" highlight lspReference ctermfg=none ctermbg=lightblue
-" highlight PopupWindow ctermbg=lightblue ctermfg=none
-" dark environment, if dark, change those values
 set background=dark
-hi Visual ctermbg=Black
-highlight Pmenu ctermbg=darkgrey ctermfg=none
-highlight PmenuSel ctermbg=white ctermfg=none
-highlight DiffText ctermfg=darkgrey
-highlight lspReference ctermfg=none ctermbg=darkblue
-highlight PopupWindow ctermbg=darkblue ctermfg=none
+
+augroup color_from_background
+  au!
+
+  au WinEnter *
+    \  if &background == 'light'
+    \ |   hi Visual ctermbg=White
+    \ |   highlight Pmenu ctermbg=lightgrey ctermfg=none
+    \ |   highlight PmenuSel ctermbg=white ctermfg=none
+    \ |   highlight DiffText ctermfg=lightgrey
+    \ |   highlight lspReference ctermfg=none ctermbg=lightblue
+    \ |   highlight PopupWindow ctermbg=lightblue ctermfg=none
+    \ |   let g:airline_theme = 'light'
+    \ | else
+    \ |   hi Visual ctermbg=Black
+    \ |   highlight Pmenu ctermbg=darkgrey ctermfg=none
+    \ |   highlight PmenuSel ctermbg=white ctermfg=none
+    \ |   highlight DiffText ctermfg=darkgrey
+    \ |   highlight lspReference ctermfg=none ctermbg=darkblue
+    \ |   highlight PopupWindow ctermbg=darkblue ctermfg=none
+    \ |   let g:airline_theme = 'dark'
+    \ | endif
+augroup END
 
 let mapleader=","
 
@@ -157,8 +163,6 @@ let g:airline_right_sep                   = ''
 let g:airline_symbols.branch              = ''
 
 " Plugin 'vim-airline/vim-airline-themes' configuration
-let g:airline_theme = 'light'
-" let g:airline_theme = 'dark'
 
 " Plug 'majutsushi/tagbar' configuration
 nmap <leader><C-t>  :TagbarOpen<CR> :wincmd p <CR>
@@ -301,15 +305,6 @@ let g:airline#extensions#ctrlp#show_adjacent_modes = 1
 
 " fugitive stuff
 let g:airline#extensions#fugitiveline#enabled = 1
-
-" " needs msys2 extra (rootmount script). There is a glitch when commiting
-" " a file using the original cc nmap. The current working director is appended
-" " with the posix form of the absolute file path of the COMMIT_EDITMSG file.
-" augroup fugitive_workaround_msys2
-"   autocmd!
-"   autocmd FileType fugitive nnoremap <buffer> cc :lcd $ROOTMOUNT<CR> :Git commit<CR>
-"   autocmd FileType fugitive nnoremap <buffer> ca :lcd $ROOTMOUNT<CR> :Git commit --amend<CR>
-" augroup END
 
 " NERDTree stuff
 let g:airline#extensions#nerdtree_statusline = 1
