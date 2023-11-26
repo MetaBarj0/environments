@@ -1,29 +1,6 @@
 " set background=light
 set background=dark
 
-augroup color_from_background
-  au!
-
-  au WinEnter *
-    \  if &background == 'light'
-    \ |   hi Visual ctermbg=White
-    \ |   highlight Pmenu ctermbg=lightgrey ctermfg=none
-    \ |   highlight PmenuSel ctermbg=white ctermfg=none
-    \ |   highlight DiffText ctermfg=lightgrey
-    \ |   highlight lspReference ctermfg=none ctermbg=lightblue
-    \ |   highlight PopupWindow ctermbg=lightblue ctermfg=none
-    \ |   let g:airline_theme = 'light'
-    \ | else
-    \ |   hi Visual ctermbg=Black
-    \ |   highlight Pmenu ctermbg=darkgrey ctermfg=none
-    \ |   highlight PmenuSel ctermbg=white ctermfg=none
-    \ |   highlight DiffText ctermfg=darkgrey
-    \ |   highlight lspReference ctermfg=none ctermbg=darkblue
-    \ |   highlight PopupWindow ctermbg=darkblue ctermfg=none
-    \ |   let g:airline_theme = 'dark'
-    \ | endif
-augroup END
-
 let mapleader=","
 
 " Quickly edit/reload the vimrc file
@@ -72,14 +49,35 @@ set nohlsearch   " don't highlight search terms
 set incsearch    " show search matches as you type
 set history=1000 " remember more commands and search history
 
-" Folding
-hi Folded ctermbg=none ctermfg=blue
+" color and highl stuff depending on background
+augroup color_from_background
+  au!
+
+  au VimEnter,WinEnter,BufEnter *
+    \  if &background == 'light'
+    \ |   hi Visual ctermbg=White
+    \ |   highlight Pmenu ctermbg=lightgrey ctermfg=none
+    \ |   highlight PmenuSel ctermbg=white ctermfg=none
+    \ |   highlight DiffText ctermfg=lightgrey
+    \ |   highlight lspReference ctermfg=none ctermbg=lightblue
+    \ |   highlight PopupWindow ctermbg=lightblue ctermfg=none
+    \ |   highlight Folded ctermbg=none ctermfg=lightblue
+    \ |   let g:airline_theme = 'light'
+    \ | else
+    \ |   hi Visual ctermbg=Black
+    \ |   highlight Pmenu ctermbg=darkgrey ctermfg=none
+    \ |   highlight PmenuSel ctermbg=white ctermfg=none
+    \ |   highlight DiffText ctermfg=darkgrey
+    \ |   highlight lspReference ctermfg=none ctermbg=darkblue
+    \ |   highlight PopupWindow ctermbg=darkblue ctermfg=none
+    \ |   highlight Folded ctermbg=none ctermfg=darkblue
+    \ |   let g:airline_theme = 'dark'
+    \ | endif
+augroup END
 
 call plug#begin()
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/nerdtree'
-Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -121,17 +119,9 @@ Plug 'mfussenegger/nvim-dap'
 "        workaround
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 Plug 'vim-scripts/BufOnly.vim'
+Plug 'nvim-tree/nvim-tree.lua'
+Plug 'nvim-tree/nvim-web-devicons'
 call plug#end()
-
-" Plug 'scrooloose/nerdtree' configuration
-nnoremap <leader><C-n>  :NERDTreeMirror<CR>:NERDTreeFocus<CR>
-nnoremap <leader><C-n>t :NERDTreeToggle<CR>:wincmd p<CR>
-nnoremap <leader><C-n>f :NERDTreeFind<CR>:wincmd p<CR>
-autocmd VimEnter * NERDTree | wincmd p
-let NERDTreeShowLineNumbers=0
-
-let g:NERDTreeDirArrowExpandable  = '▶'
-let g:NERDTreeDirArrowCollapsible = '▼'
 
 " Plug 'airblade/vim-gitgutter'
 set updatetime=300
@@ -305,9 +295,6 @@ let g:airline#extensions#ctrlp#show_adjacent_modes = 1
 
 " fugitive stuff
 let g:airline#extensions#fugitiveline#enabled = 1
-
-" NERDTree stuff
-let g:airline#extensions#nerdtree_statusline = 1
 
 " tagbar stuff
 let g:airline#extensions#tagbar#flags = ''
@@ -591,3 +578,73 @@ end
 
 EOF
 
+" Plug 'nvim-tree/nvim-tree.lua' configuration
+lua << EOF
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- empty setup using defaults
+require("nvim-tree").setup({
+  view = {
+    number = false,
+    relativenumber = false,
+    width = 40,
+  },
+})
+EOF
+
+augroup nvim-tree
+  au!
+
+  au VimEnter * NvimTreeOpen
+augroup END
+
+nmap <leader><C-n>  :NvimTreeToogle<CR> :wincmd p <CR>
+nmap <leader><C-n>f  :NvimTreeFindFile<CR> :wincmd p <CR>
+
+" Plug 'nvim-tree/nvim-web-devicons' configuration
+lua << EOF
+require'nvim-web-devicons'.setup {
+ -- your personnal icons can go here (to override)
+ -- you can specify color or cterm_color instead of specifying both of them
+ -- DevIcon will be appended to `name`
+ override = {
+  zsh = {
+    icon = "",
+    color = "#428850",
+    cterm_color = "65",
+    name = "Zsh"
+  }
+ };
+ -- globally enable different highlight colors per icon (default to true)
+ -- if set to false all icons will have the default icon's color
+ color_icons = true;
+ -- globally enable default icons (default to false)
+ -- will get overriden by `get_icons` option
+ default = true;
+ -- globally enable "strict" selection of icons - icon will be looked up in
+ -- different tables, first by filename, and if not found by extension; this
+ -- prevents cases when file doesn't have any extension but still gets some icon
+ -- because its name happened to match some extension (default to false)
+ strict = true;
+ -- same as `override` but specifically for overrides by filename
+ -- takes effect when `strict` is true
+ override_by_filename = {
+  [".gitignore"] = {
+    icon = "",
+    color = "#f1502f",
+    name = "Gitignore"
+  }
+ };
+ -- same as `override` but specifically for overrides by extension
+ -- takes effect when `strict` is true
+ override_by_extension = {
+  ["log"] = {
+    icon = "",
+    color = "#81e043",
+    name = "Log"
+  }
+ };
+}
+EOF
