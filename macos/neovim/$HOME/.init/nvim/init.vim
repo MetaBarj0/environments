@@ -303,6 +303,7 @@ let g:airline#extensions#tagbar#searchmethod = 'nearest-stl'
 " c/c++ linting
 let g:ale_linters = {
 \   'cpp': ['clangd'],
+\   'c': ['clangd'],
 \}
 let g:ale_linter_aliases = {
 \  'h': 'cpp',
@@ -600,7 +601,7 @@ augroup nvim-tree
   au VimEnter * NvimTreeOpen
 augroup END
 
-nmap <leader><C-n>  :NvimTreeToogle<CR> :wincmd p <CR>
+nmap <leader><C-n>  :NvimTreeToggle<CR> :wincmd p <CR>
 nmap <leader><C-n>f  :NvimTreeFindFile<CR> :wincmd p <CR>
 
 " Plug 'nvim-tree/nvim-web-devicons' configuration
