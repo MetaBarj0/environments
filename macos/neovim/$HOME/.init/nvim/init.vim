@@ -121,6 +121,7 @@ Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 Plug 'vim-scripts/BufOnly.vim'
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-tree/nvim-web-devicons'
+Plug 'rafamadriz/neon'
 call plug#end()
 
 " Plug 'airblade/vim-gitgutter'
@@ -649,3 +650,10 @@ require'nvim-web-devicons'.setup {
  };
 }
 EOF
+
+" Plug 'rafamadriz/neon' configuration
+augroup colorscheme-neon
+  au!
+
+  au VimEnter * colorscheme neon
+augroup END
