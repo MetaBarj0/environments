@@ -62,7 +62,7 @@ augroup color_from_background
     \ |   highlight lspReference ctermfg=none ctermbg=lightblue
     \ |   highlight PopupWindow ctermbg=lightblue ctermfg=none
     \ |   highlight Folded ctermbg=none ctermfg=lightblue
-    \ |   let g:airline_theme = 'light'
+    \ |   let g:airline_theme = 'google_light'
     \ | else
     \ |   hi Visual ctermbg=Black
     \ |   highlight Pmenu ctermbg=darkgrey ctermfg=none
@@ -71,7 +71,7 @@ augroup color_from_background
     \ |   highlight lspReference ctermfg=none ctermbg=darkblue
     \ |   highlight PopupWindow ctermbg=darkblue ctermfg=none
     \ |   highlight Folded ctermbg=none ctermfg=darkblue
-    \ |   let g:airline_theme = 'dark'
+    \ |   let g:airline_theme = 'google_dark'
     \ | endif
 augroup END
 
