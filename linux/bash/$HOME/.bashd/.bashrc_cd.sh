@@ -33,7 +33,7 @@ cd_func ()
   #
   # Now change to the new dir and add to the top of the stack
   pushd "${the_new_dir}" > /dev/null
-  [[ $? -ne 0 ]] && return 1
+  [ $? -ne 0 ] && return 1
   the_new_dir=$(pwd)
 
   #
@@ -44,7 +44,7 @@ cd_func ()
   # Remove any other occurence of this dir, skipping the top of the stack
   for ((cnt=1; cnt <= 10; cnt++)); do
     x2=$(dirs +${cnt} 2>/dev/null)
-    [[ $? -ne 0 ]] && return 0
+    [ $? -ne 0 ] && return 0
     [[ ${x2:0:1} == '~' ]] && x2="${HOME}${x2:1}"
     if [[ "${x2}" == "${the_new_dir}" ]]; then
       popd -n +$cnt 2>/dev/null 1>/dev/null
