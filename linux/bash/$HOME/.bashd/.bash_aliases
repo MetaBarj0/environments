@@ -27,3 +27,5 @@ alias la='ls -A'              # all but . and ..
 alias l='ls -CF'              #
 alias s='cd ..'
 
+# mandatory things for a developer
+alias g=git
