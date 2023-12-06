@@ -597,6 +597,9 @@ require("nvim-tree").setup({
     relativenumber = false,
     width = 40,
   },
+  git = {
+    timeout = 10000
+  }
 })
 EOF
 
