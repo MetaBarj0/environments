@@ -319,7 +319,11 @@ let g:ale_linter_aliases = {
 \}
 
 " Plug 'tpope/vim-dispatch' configuration
-let g:tmux_session = 0
+let g:dispatch_handlers=[
+\ 'job',
+\ 'terminal',
+\ 'headless'
+\ ]
 
 " Plug 'vim-denops/denops.vim' configuration
 
