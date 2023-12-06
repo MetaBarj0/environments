@@ -127,6 +127,7 @@ Plug 'vim-scripts/BufOnly.vim'
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'rafamadriz/neon'
+Plug 'rbong/vim-flog'
 call plug#end()
 
 " Plug 'airblade/vim-gitgutter'
@@ -669,3 +670,5 @@ augroup colorscheme-neon
 
   au VimEnter * colorscheme neon
 augroup END
+
+" Plug 'rbong/vim-flog' configuration
