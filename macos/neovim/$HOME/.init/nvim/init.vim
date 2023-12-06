@@ -49,12 +49,18 @@ set nohlsearch   " don't highlight search terms
 set incsearch    " show search matches as you type
 set history=1000 " remember more commands and search history
 
-" color and highl stuff depending on background
 augroup color_from_background
   au!
 
+  au User AirlineAfterInit
+    \   if &background == 'light'
+    \ |   AirlineTheme google_light
+    \ | else
+    \ |   AirlineTheme google_dark
+    \ | endif
+
   au VimEnter,WinEnter,BufEnter *
-    \  if &background == 'light'
+    \   if &background == 'light'
     \ |   hi Visual ctermbg=White
     \ |   highlight Pmenu ctermbg=lightgrey ctermfg=none
     \ |   highlight PmenuSel ctermbg=white ctermfg=none
@@ -62,7 +68,6 @@ augroup color_from_background
     \ |   highlight lspReference ctermfg=none ctermbg=lightblue
     \ |   highlight PopupWindow ctermbg=lightblue ctermfg=none
     \ |   highlight Folded ctermbg=none ctermfg=lightblue
-    \ |   let g:airline_theme = 'google_light'
     \ | else
     \ |   hi Visual ctermbg=Black
     \ |   highlight Pmenu ctermbg=darkgrey ctermfg=none
@@ -71,8 +76,8 @@ augroup color_from_background
     \ |   highlight lspReference ctermfg=none ctermbg=darkblue
     \ |   highlight PopupWindow ctermbg=darkblue ctermfg=none
     \ |   highlight Folded ctermbg=none ctermfg=darkblue
-    \ |   let g:airline_theme = 'google_dark'
     \ | endif
+    \ | AirlineRefresh
 augroup END
 
 call plug#begin()
@@ -147,7 +152,7 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
-let g:airline#extensions#tabline#enabled  = 1
+let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline_left_sep                    = ''
 let g:airline_right_sep                   = ''
