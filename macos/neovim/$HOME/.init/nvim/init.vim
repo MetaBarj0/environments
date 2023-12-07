@@ -49,6 +49,7 @@ set nohlsearch   " don't highlight search terms
 set incsearch    " show search matches as you type
 set history=1000 " remember more commands and search history
 
+" color and highlight configuration
 augroup color_from_background
   au!
 
@@ -79,6 +80,9 @@ augroup color_from_background
     \ | endif
     \ | AirlineRefresh
 augroup END
+
+" terminal configuration
+:tnoremap <Esc> <C-\><C-n>
 
 call plug#begin()
 Plug 'tpope/vim-sensible'
