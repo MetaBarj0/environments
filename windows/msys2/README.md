@@ -20,6 +20,11 @@ program rather than the `mingw64.exe` program.
 Some configuration folders contain a `$HOME` folder. This is a placeholder that must be replaced
 by your real home folder on your MSYS2 system (i.e. /home/john)
 
+### Common configuration
+
+In the upper `common` folder, you may find useful configuration file for
+various softwares.
+
 ### Fonts
 
 This MSYS2 environment is meant to be used with the `mintty` terminal emulator and some of its

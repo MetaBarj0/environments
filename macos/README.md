@@ -13,6 +13,11 @@ that is why those items may at first look empty.
 Some configuration folders contain a `$HOME` folder. This is a placeholder that must be replaced
 by your real home folder on your system (i.e. /home/john)
 
+### Common configuration
+
+In the upper `common` folder, you may find useful configuration file for
+various softwares.
+
 ### zsh
 
 The zsh subdirectory contains everything you'll need to go further. Make sure
