@@ -669,10 +669,14 @@ require'nvim-web-devicons'.setup {
 EOF
 
 " Plug 'rafamadriz/neon' configuration
-augroup colorscheme-neon
-  au!
+lua << EOF
+if vim.o.background == 'light' then
+  vim.g.neon_style = 'light'
+else
+  vim.g.neon_style = 'dark'
+end
 
-  au VimEnter * colorscheme neon
-augroup END
+vim.cmd[[colorscheme neon]]
+EOF
 
 " Plug 'rbong/vim-flog' configuration
