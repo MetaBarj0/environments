@@ -1,7 +1,7 @@
 # This is Git's per-user configuration file.
 [user]
-  name  = sebastien.levy
-  email = sebastien.levy@ringover.com
+  name  =
+  email =
 
 [core]
   editor = nvim
