@@ -132,6 +132,7 @@ Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'rafamadriz/neon'
 Plug 'rbong/vim-flog'
+Plug 'aliou/bats.vim'
 call plug#end()
 
 " Plug 'airblade/vim-gitgutter'
@@ -680,3 +681,5 @@ vim.cmd[[colorscheme neon]]
 EOF
 
 " Plug 'rbong/vim-flog' configuration
+
+" Plug 'aliou/bats.vim' configuration
