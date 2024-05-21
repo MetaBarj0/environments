@@ -1,5 +1,5 @@
-" set background=light
-set background=dark
+" set background=dark
+set background=light
 
 let mapleader=","
 
@@ -55,9 +55,9 @@ augroup color_from_background
 
   au User AirlineAfterInit
     \   if &background == 'light'
-    \ |   AirlineTheme google_light
+    \ |   AirlineTheme base16_classic_light
     \ | else
-    \ |   AirlineTheme google_dark
+    \ |   AirlineTheme base16_classic_dark
     \ | endif
 
   au VimEnter,WinEnter,BufEnter *
@@ -69,6 +69,7 @@ augroup color_from_background
     \ |   highlight lspReference ctermfg=none ctermbg=lightblue
     \ |   highlight PopupWindow ctermbg=lightblue ctermfg=none
     \ |   highlight Folded ctermbg=none ctermfg=lightblue
+    \ |   highlight ClapInput ctermbg=lightgrey ctermfg=none
     \ | else
     \ |   hi Visual ctermbg=Black
     \ |   highlight Pmenu ctermbg=darkgrey ctermfg=none
@@ -77,6 +78,7 @@ augroup color_from_background
     \ |   highlight lspReference ctermfg=none ctermbg=darkblue
     \ |   highlight PopupWindow ctermbg=darkblue ctermfg=none
     \ |   highlight Folded ctermbg=none ctermfg=darkblue
+    \ |   highlight ClapInput ctermbg=darkgrey ctermfg=none
     \ | endif
     \ | AirlineRefresh
 augroup END
@@ -111,7 +113,7 @@ Plug 'mattn/vim-lsp-settings'
 Plug 'vim-denops/denops.vim'
 Plug 'vim-denops/denops-helloworld.vim'
 Plug 'Shougo/pum.vim'
-Plug 'Shougo/ddc.vim'
+Plug 'Shougo/ddc.vim', { 'tag': 'v5.0.0' }
 Plug 'tani/ddc-fuzzy'
 Plug 'Shougo/ddc-ui-pum'
 Plug 'shougo/neco-vim'
