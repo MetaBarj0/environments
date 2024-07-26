@@ -18,6 +18,8 @@ nnoremap <Leader>bn :bn<CR>
 nnoremap <Leader>bp :bp<CR>
 nnoremap <Leader>xbn :bn<CR>:bd #<CR>
 nnoremap <Leader>xbp :bp<CR>:bd #<CR>
+nnoremap <Leader>xbd :bd #<CR>
+nnoremap <Leader>btt :tabnew %<CR>
 nnoremap <Leader>btp :tabnew %<CR>:tabp<CR>:bp<CR>:tabn<CR>
 nnoremap <Leader>btn :tabnew %<CR>:tabp<CR>:bn<CR>:tabn<CR>
 
