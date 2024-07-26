@@ -142,6 +142,7 @@ Plug 'rcarriga/nvim-dap-ui'
 Plug 'williamboman/mason.nvim'
 Plug 'WhoIsSethDaniel/mason-tool-installer.nvim'
 Plug 'julianolf/nvim-dap-lldb'
+Plug 'Weissle/persistent-breakpoints.nvim'
 call plug#end()
 
 " Plug 'airblade/vim-gitgutter'
@@ -605,8 +606,6 @@ EOF
 " Plug 'aliou/bats.vim' configuration
 
 " Plug 'mfussenegger/nvim-dap' configuration
-nnoremap <Leader><Leader><Leader>db :DapToggleBreakpoint <CR>
-
 lua << EOF
 local dap = require('dap')
 
@@ -727,4 +726,21 @@ require('mason-tool-installer').setup {
 EOF
 
 " Plug 'julianolf/nvim-dap-lldb' configuration
-lua require('dap-lldb').setup()
+lua require("dap-lldb").setup()
+
+" Plug 'Weissle/persistent-breakpoints.nvim' configuration
+nnoremap <Leader><Leader><Leader>db :PBToggleBreakpoint <CR>
+
+lua << EOF
+require('persistent-breakpoints').setup{
+	load_breakpoints_event = { "BufReadPost" },
+	save_dir = vim.fn.stdpath('data') .. '/nvim_checkpoints',
+	-- record the performance of different function. run :lua require('persistent-breakpoints.api').print_perf_data() to see the result.
+	perf_record = false,
+	-- perform callback when loading a persisted breakpoint
+	--- @param opts DAPBreakpointOptions options used to create the breakpoint ({condition, logMessage, hitCondition})
+	--- @param buf_id integer the buffer the breakpoint was set on
+	--- @param line integer the line the breakpoint was set on
+	on_load_breakpoint = nil,
+}
+EOF
