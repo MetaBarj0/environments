@@ -605,8 +605,12 @@ EOF
 " Plug 'aliou/bats.vim' configuration
 
 " Plug 'mfussenegger/nvim-dap' configuration
+nnoremap <Leader><Leader><Leader>db :DapToggleBreakpoint <CR>
+
 lua << EOF
 local dap = require('dap')
+
+vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
 
 dap.adapters.lldb = {
   type = 'executable',
