@@ -1,5 +1,5 @@
-" set background=dark
-set background=light
+set background=dark
+" set background=light
 
 let mapleader=","
 
@@ -697,6 +697,7 @@ EOF
 
 " Plug 'rcarriga/nvim-dap-ui' configuration
 lua require('dapui').setup()
+nnoremap <Leader><Leader><Leader>dt :lua require('dapui').toggle()<CR>
 
 " Plug 'williamboman/mason.nvim' configuration
 lua << EOF
