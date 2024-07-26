@@ -125,7 +125,6 @@ Plug 'w0rp/ale'
 Plug 'tpope/vim-dispatch'
 Plug 'bfrg/vim-cpp-modern'
 Plug 'tpope/vim-abolish'
-Plug 'mfussenegger/nvim-dap'
 " FIXME: the following may fail, restart vim, then execute the do command as a
 "        workaround
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
@@ -135,6 +134,12 @@ Plug 'nvim-tree/nvim-web-devicons'
 Plug 'rafamadriz/neon'
 Plug 'rbong/vim-flog'
 Plug 'aliou/bats.vim'
+Plug 'nvim-neotest/nvim-nio'
+Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui'
+Plug 'williamboman/mason.nvim'
+Plug 'WhoIsSethDaniel/mason-tool-installer.nvim'
+Plug 'julianolf/nvim-dap-lldb'
 call plug#end()
 
 " Plug 'airblade/vim-gitgutter'
@@ -508,6 +513,95 @@ let g:cpp_simple_highlight = 1
 
 " Plug 'tpope/vim-abolish' configuration
 
+" Plug 'nvim-tree/nvim-tree.lua' configuration
+lua << EOF
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- empty setup using defaults
+require("nvim-tree").setup({
+  view = {
+    number = false,
+    relativenumber = false,
+    width = 40,
+  },
+  git = {
+    timeout = 10000
+  }
+})
+EOF
+
+augroup nvim-tree
+  au!
+
+  au VimEnter * NvimTreeOpen
+augroup END
+
+nmap <leader><C-n>  :NvimTreeToggle<CR> :wincmd p <CR>
+nmap <leader><C-n>f  :NvimTreeFindFile<CR> :wincmd p <CR>
+
+" Plug 'nvim-tree/nvim-web-devicons' configuration
+lua << EOF
+require'nvim-web-devicons'.setup {
+ -- your personnal icons can go here (to override)
+ -- you can specify color or cterm_color instead of specifying both of them
+ -- DevIcon will be appended to `name`
+ override = {
+  zsh = {
+    icon = "",
+    color = "#428850",
+    cterm_color = "65",
+    name = "Zsh"
+  }
+ };
+ -- globally enable different highlight colors per icon (default to true)
+ -- if set to false all icons will have the default icon's color
+ color_icons = true;
+ -- globally enable default icons (default to false)
+ -- will get overriden by `get_icons` option
+ default = true;
+ -- globally enable "strict" selection of icons - icon will be looked up in
+ -- different tables, first by filename, and if not found by extension; this
+ -- prevents cases when file doesn't have any extension but still gets some icon
+ -- because its name happened to match some extension (default to false)
+ strict = true;
+ -- same as `override` but specifically for overrides by filename
+ -- takes effect when `strict` is true
+ override_by_filename = {
+  [".gitignore"] = {
+    icon = "",
+    color = "#f1502f",
+    name = "Gitignore"
+  }
+ };
+ -- same as `override` but specifically for overrides by extension
+ -- takes effect when `strict` is true
+ override_by_extension = {
+  ["log"] = {
+    icon = "",
+    color = "#81e043",
+    name = "Log"
+  }
+ };
+}
+EOF
+
+" Plug 'rafamadriz/neon' configuration
+lua << EOF
+if vim.o.background == 'light' then
+  vim.g.neon_style = 'light'
+else
+  vim.g.neon_style = 'dark'
+end
+
+vim.cmd[[colorscheme neon]]
+EOF
+
+" Plug 'rbong/vim-flog' configuration
+
+" Plug 'aliou/bats.vim' configuration
+
 " Plug 'mfussenegger/nvim-dap' configuration
 lua << EOF
 local dap = require('dap')
@@ -597,91 +691,33 @@ end
 
 EOF
 
-" Plug 'nvim-tree/nvim-tree.lua' configuration
-lua << EOF
--- disable netrw at the very start of your init.lua
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+" Plug 'nvim-neotest/nvim-nio' configuration
 
--- empty setup using defaults
-require("nvim-tree").setup({
-  view = {
-    number = false,
-    relativenumber = false,
-    width = 40,
-  },
-  git = {
-    timeout = 10000
-  }
+" Plug 'rcarriga/nvim-dap-ui' configuration
+lua require('dapui').setup()
+
+" Plug 'williamboman/mason.nvim' configuration
+lua << EOF
+require("mason").setup({
+    ui = {
+        icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗"
+        }
+    }
 })
 EOF
 
-augroup nvim-tree
-  au!
+" Plug 'WhoIsSethDaniel/mason-tool-installer.nvim' configuration
 
-  au VimEnter * NvimTreeOpen
-augroup END
-
-nmap <leader><C-n>  :NvimTreeToggle<CR> :wincmd p <CR>
-nmap <leader><C-n>f  :NvimTreeFindFile<CR> :wincmd p <CR>
-
-" Plug 'nvim-tree/nvim-web-devicons' configuration
 lua << EOF
-require'nvim-web-devicons'.setup {
- -- your personnal icons can go here (to override)
- -- you can specify color or cterm_color instead of specifying both of them
- -- DevIcon will be appended to `name`
- override = {
-  zsh = {
-    icon = "",
-    color = "#428850",
-    cterm_color = "65",
-    name = "Zsh"
+require('mason-tool-installer').setup {
+  ensure_installed = {
+    'codelldb'
   }
- };
- -- globally enable different highlight colors per icon (default to true)
- -- if set to false all icons will have the default icon's color
- color_icons = true;
- -- globally enable default icons (default to false)
- -- will get overriden by `get_icons` option
- default = true;
- -- globally enable "strict" selection of icons - icon will be looked up in
- -- different tables, first by filename, and if not found by extension; this
- -- prevents cases when file doesn't have any extension but still gets some icon
- -- because its name happened to match some extension (default to false)
- strict = true;
- -- same as `override` but specifically for overrides by filename
- -- takes effect when `strict` is true
- override_by_filename = {
-  [".gitignore"] = {
-    icon = "",
-    color = "#f1502f",
-    name = "Gitignore"
-  }
- };
- -- same as `override` but specifically for overrides by extension
- -- takes effect when `strict` is true
- override_by_extension = {
-  ["log"] = {
-    icon = "",
-    color = "#81e043",
-    name = "Log"
-  }
- };
 }
 EOF
 
-" Plug 'rafamadriz/neon' configuration
-lua << EOF
-if vim.o.background == 'light' then
-  vim.g.neon_style = 'light'
-else
-  vim.g.neon_style = 'dark'
-end
-
-vim.cmd[[colorscheme neon]]
-EOF
-
-" Plug 'rbong/vim-flog' configuration
-
-" Plug 'aliou/bats.vim' configuration
+" Plug 'julianolf/nvim-dap-lldb' configuration
+lua require('dap-lldb').setup()
