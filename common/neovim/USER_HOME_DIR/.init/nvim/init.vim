@@ -115,7 +115,7 @@ Plug 'mattn/vim-lsp-settings'
 Plug 'vim-denops/denops.vim'
 Plug 'vim-denops/denops-helloworld.vim'
 Plug 'Shougo/pum.vim'
-Plug 'Shougo/ddc.vim', { 'tag': 'v5.0.0' }
+Plug 'Shougo/ddc.vim'
 Plug 'tani/ddc-fuzzy'
 Plug 'Shougo/ddc-ui-pum'
 Plug 'shougo/neco-vim'
