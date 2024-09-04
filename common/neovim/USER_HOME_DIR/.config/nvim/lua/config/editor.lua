@@ -1,5 +1,7 @@
 require("utils.reloadConfig")
 
+vim.cmd("colorscheme tokyonight-night")
+
 -- global settings
 vim.g.mapleader = ","
 vim.g.maplocalleader = "\\"
