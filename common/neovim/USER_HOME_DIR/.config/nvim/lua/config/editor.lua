@@ -19,6 +19,11 @@ vim.opt.errorbells  = false
 vim.opt.backup      = false
 vim.opt.swapfile    = false
 vim.opt.wildignore  = { '*.swp', '*.bak', '*.pyc', '*.class' }
+vim.opt.showmatch   = true
+vim.opt.smartcase   = true
+vim.opt.hlsearch    = false
+vim.opt.incsearch   = true
+vim.opt.history     = 1000
 
 -- global variables
 vim.g.mapleader = ','
@@ -41,3 +46,6 @@ vim.keymap.set('n', '<Leader>btn', ':tabnew %<CR>:tabp<CR>:bn<CR>:tabn<CR>' , { 
 -- visual mode mappings
 vim.keymap.set('v', '<', '<gv', { silent = true, remap = false })
 vim.keymap.set('v', '>', '>gv', { silent = true, remap = false })
+
+-- terminal mappings
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
