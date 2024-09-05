@@ -3,3 +3,6 @@ require("config.lazy")
 
 -- editor config
 require("config.editor")
+
+-- lsp config
+require("config.lsp")
