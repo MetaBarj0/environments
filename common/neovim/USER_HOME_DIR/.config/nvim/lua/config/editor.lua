@@ -2,12 +2,6 @@ require("utils.reloadConfig")
 
 vim.cmd("colorscheme tokyonight-night")
 
--- global settings
-vim.g.mapleader = ","
-vim.g.maplocalleader = "\\"
-
--- general settings
-
 vim.opt.background = "dark"
 vim.opt.hidden = true
 vim.opt.tabstop = 2
