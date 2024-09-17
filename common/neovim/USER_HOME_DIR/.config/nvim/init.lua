@@ -6,3 +6,6 @@ require("config.editor")
 
 -- lsp config
 require("config.lsp")
+
+-- easy motion config
+require("config.easymotion")
