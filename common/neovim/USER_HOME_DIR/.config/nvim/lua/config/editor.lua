@@ -1,6 +1,6 @@
 require("utils.reloadConfig")
 
-vim.cmd("colorscheme tokyonight-night")
+vim.cmd("colorscheme catppuccin")
 
 vim.opt.background = "dark"
 vim.opt.hidden = true
