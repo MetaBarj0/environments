@@ -1,4 +1,8 @@
-local dap = require("dap")
+local has_dap, dap = pcall(require, "dap")
+
+if not has_dap then
+	return
+end
 
 dap.adapters.lldb = {
 	type = "executable",
